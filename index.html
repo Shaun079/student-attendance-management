@@ -1,0 +1,3393 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="EduTrack Enterprise Attendance Management System">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="EduTrack Pro">
+    
+    <title>EduTrack Pro | Secure Access</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Luckiest+Guy&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ----------------------------------------------------------------------------------
+           1.0 DESIGN TOKENS (CSS VARIABLES)
+           ---------------------------------------------------------------------------------- */
+        :root {
+            /* * Brand Colors 
+             * Matches the exact deep blue and crisp whites from the reference design.
+             */
+            --color-bg-app:          #f8fafc;
+            --color-bg-card:         #ffffff;
+            
+            --color-login-grad-1:    #0f172a;
+            --color-login-grad-2:    #1e3a8a;
+            
+            --color-brand-900:       #0f172a;
+            --color-brand-800:       #1e293b;
+            --color-brand-700:       #334155;
+            
+            --color-accent-main:     #2563eb;
+            --color-accent-hover:    #1d4ed8;
+            --color-accent-light:    #eff6ff;
+            --color-accent-glow:     rgba(37, 99, 235, 0.25);
+            
+            /* * Semantic Status Colors 
+             * Used for badges, charts, and notification toasts.
+             */
+            --color-success-main:    #10b981;
+            --color-success-dark:    #059669;
+            --color-success-bg:      #ecfdf5;
+            --color-success-border:  #a7f3d0;
+            
+            --color-danger-main:     #ef4444;
+            --color-danger-dark:     #dc2626;
+            --color-danger-bg:       #fef2f2;
+            --color-danger-border:   #fecaca;
+            
+            --color-warning-main:    #f59e0b;
+            --color-warning-dark:    #d97706;
+            --color-warning-bg:      #fffbeb;
+            --color-warning-border:  #fde68a;
+
+            --color-info-main:       #0ea5e9;
+            --color-info-dark:       #0369a1;
+            --color-info-bg:         #f0f9ff;
+            --color-info-border:     #bae6fd;
+            
+            /* * Role-Specific Icon Colors 
+             */
+            --color-role-student:    #3b82f6;
+            --color-role-faculty:    #f59e0b;
+            --color-role-hod:        #10b981;
+            --color-role-principal:  #ef4444;
+            
+            /* * UI Surfaces & Borders 
+             */
+            --color-surface-hover:   #f1f5f9;
+            --color-surface-input:   #f1f5f9;
+            --color-border-light:    #e2e8f0;
+            --color-border-dark:     #cbd5e1;
+            --color-overlay-bg:      rgba(15, 23, 42, 0.75);
+            
+            /* * Typography Ink 
+             */
+            --color-text-heading:    #0f172a;
+            --color-text-body:       #334155;
+            --color-text-muted:      #64748b;
+            --color-text-disabled:   #94a3b8;
+            --color-text-white:      #ffffff;
+            
+            /* * Font Families 
+             */
+            --font-sans:             'Inter', system-ui, sans-serif;
+            --font-display:          'Outfit', sans-serif;
+            --font-mono:             'JetBrains Mono', monospace;
+            
+            /* * Layout Geometry 
+             */
+            --layout-sidebar-width:  280px;
+            --layout-header-height:  80px;
+            --layout-padding:        40px;
+            
+            /* * Border Radii 
+             */
+            --radius-sm:             6px;
+            --radius-md:             12px;
+            --radius-lg:             16px;
+            --radius-xl:             24px;
+            --radius-circle:         9999px;
+            
+            /* * Elevation & Box Shadows 
+             */
+            --shadow-sm:             0 1px 2px 0 rgba(15, 23, 42, 0.05);
+            --shadow-md:             0 4px 6px -1px rgba(15, 23, 42, 0.08);
+            --shadow-lg:             0 10px 15px -3px rgba(15, 23, 42, 0.08);
+            --shadow-xl:             0 20px 25px -5px rgba(15, 23, 42, 0.1);
+            --shadow-card:           0 8px 30px rgba(15, 23, 42, 0.04);
+            --shadow-float:          0 20px 40px -10px rgba(0, 0, 0, 0.15);
+            
+            /* * Animation Timings 
+             */
+            --transition-fast:       150ms ease;
+            --transition-normal:     250ms ease;
+            --transition-slow:       400ms ease;
+        }
+
+        /* ----------------------------------------------------------------------------------
+           2.0 GLOBAL RESET & NORMALIZE (Fully Expanded)
+           ---------------------------------------------------------------------------------- */
+        * {
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            padding-top: 0;
+            padding-right: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::before {
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            padding-top: 0;
+            padding-right: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+            box-sizing: border-box;
+        }
+
+        ::after {
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            padding-top: 0;
+            padding-right: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg-app);
+            color: var(--color-text-body);
+            line-height: 1.6;
+            height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            overflow-y: hidden; /* Prevents global scrolling, ensures app feel */
+            display: flex;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* * Typography Base Styles 
+         */
+        h1 {
+            font-family: var(--font-display);
+            color: var(--color-text-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            color: var(--color-text-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            color: var(--color-text-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        h4 {
+            font-family: var(--font-display);
+            color: var(--color-text-muted);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        h5 {
+            font-family: var(--font-display);
+            color: var(--color-text-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        h6 {
+            font-family: var(--font-display);
+            color: var(--color-text-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            max-width: 75ch;
+            font-family: var(--font-sans);
+            line-height: 1.6;
+        }
+
+        /* * Base Interactive Elements 
+         */
+        button {
+            border-top-width: 0;
+            border-right-width: 0;
+            border-bottom-width: 0;
+            border-left-width: 0;
+            border-style: none;
+            background-color: transparent;
+            font-family: inherit;
+            cursor: pointer;
+            outline: none;
+        }
+
+        input {
+            outline: none;
+            font-family: inherit;
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+        }
+
+        select {
+            outline: none;
+            font-family: inherit;
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+        }
+
+        textarea {
+            outline: none;
+            font-family: inherit;
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        ol {
+            list-style-type: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ----------------------------------------------------------------------------------
+           3.0 SPLIT-SCREEN LOGIN INTERFACE (EXACT MATCH REFERENCE UI)
+           ---------------------------------------------------------------------------------- */
+        
+        /* * Main Container
+         * Ensures the login screen covers the entire viewport without scrolling.
+         */
+        #login-viewport {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 9999;
+            background-color: var(--color-bg-card);
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            transition-property: opacity;
+            transition-duration: 0.5s;
+            transition-timing-function: ease;
+        }
+
+        /* * Left Panel: Animated Gradient Art 
+         */
+        .login-visual-panel {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0%;
+            background-image: linear-gradient(135deg, var(--color-login-grad-1) 0%, var(--color-login-grad-2) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-white);
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            padding-top: 40px;
+            padding-right: 40px;
+            padding-bottom: 40px;
+            padding-left: 40px;
+        }
+
+        /* Hide visual panel on mobile to prioritize the form */
+        @media (max-width: 900px) {
+            .login-visual-panel {
+                display: none;
+            }
+        }
+
+        /* Floating Ambient Light Orbs */
+        .ambient-orb {
+            position: absolute;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+        }
+
+        .ambient-orb-primary {
+            width: 450px;
+            height: 450px;
+            background-color: #2563eb;
+            bottom: 10%;
+            right: 10%;
+        }
+
+        .ambient-orb-secondary {
+            width: 350px;
+            height: 350px;
+            background-color: #3b82f6;
+            top: 20%;
+            left: -50px;
+            opacity: 0.2;
+        }
+
+        /* Content inside the Left Panel */
+        .visual-panel-content {
+            z-index: 10;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .visual-brand-logo {
+            margin-bottom: 35px;
+        }
+
+        .visual-brand-logo i {
+            font-size: 5.5rem;
+            color: var(--color-accent-main);
+            text-shadow: 0px 0px 30px rgba(37, 99, 235, 0.6);
+        }
+
+        .visual-panel-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--color-text-white);
+            margin-bottom: 30px;
+            font-family: var(--font-sans);
+            letter-spacing: 0;
+            line-height: 1.4;
+            max-width: 400px;
+        }
+
+        /* Feature Pills (Enterprise Security, Real-time Sync) */
+        .feature-pill-container {
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .feature-pill {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.15);
+            padding-top: 12px;
+            padding-right: 20px;
+            padding-bottom: 12px;
+            padding-left: 20px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Build version text at bottom left */
+        .visual-panel-footer {
+            position: absolute;
+            bottom: 30px;
+            left: 40px;
+            font-size: 0.8rem;
+            color: var(--color-text-white);
+            opacity: 0.5;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* * Right Panel: Clean White Form 
+         */
+        .login-form-panel {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 40px;
+            padding-right: 40px;
+            padding-bottom: 40px;
+            padding-left: 40px;
+            background-color: var(--color-bg-card);
+            height: 100vh;
+            overflow-y: auto; /* Scrollable if screen is extremely tiny */
+        }
+
+        .login-form-card {
+            width: 100%;
+            max-width: 440px;
+            background-color: var(--color-bg-card);
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .login-form-header {
+            margin-bottom: 35px;
+        }
+
+        .login-form-header h1 {
+            font-size: 2.4rem;
+            color: var(--color-text-heading);
+            margin-bottom: 10px;
+            font-family: var(--font-display);
+            font-weight: 700;
+        }
+
+        .login-form-header p {
+            color: var(--color-text-muted);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+            font-family: var(--font-sans);
+        }
+
+        /* * Role Selection Grid (Matches Screenshot) 
+         */
+        .role-selection-group {
+            margin-bottom: 25px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: var(--font-sans);
+        }
+
+        .role-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .role-option-card {
+            padding-top: 20px;
+            padding-right: 12px;
+            padding-bottom: 20px;
+            padding-left: 12px;
+            background-color: var(--color-surface-input);
+            border-top-width: 2px;
+            border-right-width: 2px;
+            border-bottom-width: 2px;
+            border-left-width: 2px;
+            border-style: solid;
+            border-color: transparent;
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
+            border-bottom-right-radius: 14px;
+            border-bottom-left-radius: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition-property: all;
+            transition-duration: var(--transition-fast);
+            transition-timing-function: ease;
+            color: var(--color-text-body);
+        }
+
+        .role-option-card:hover {
+            transform: translateY(-2px);
+            background-color: var(--color-surface-hover);
+        }
+
+        .role-option-card.is-active {
+            background-color: var(--color-brand-900);
+            color: var(--color-text-white);
+            box-shadow: 0px 10px 20px rgba(15, 23, 42, 0.15);
+        }
+
+        .role-option-card i {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: block;
+            transition-property: color;
+            transition-duration: var(--transition-fast);
+            transition-timing-function: ease;
+        }
+
+        /* Specific icon colors when not active */
+        .role-option-card[data-role="student"]:not(.is-active) i { 
+            color: var(--color-role-student); 
+        }
+        .role-option-card[data-role="teacher"]:not(.is-active) i { 
+            color: var(--color-role-faculty); 
+        }
+        .role-option-card[data-role="hod"]:not(.is-active) i { 
+            color: var(--color-role-hod); 
+        }
+        .role-option-card[data-role="principal"]:not(.is-active) i { 
+            color: var(--color-role-principal); 
+        }
+        
+        /* All icons white when active */
+        .role-option-card.is-active i { 
+            color: var(--color-text-white); 
+        }
+
+        .role-option-card span {
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: var(--font-sans);
+        }
+
+        /* * Form Input Fields 
+         */
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .text-input-field {
+            width: 100%;
+            padding-top: 16px;
+            padding-right: 20px;
+            padding-bottom: 16px;
+            padding-left: 20px;
+            border-top-width: 2px;
+            border-right-width: 2px;
+            border-bottom-width: 2px;
+            border-left-width: 2px;
+            border-style: solid;
+            border-color: transparent;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            border-bottom-left-radius: 12px;
+            font-size: 1.05rem;
+            background-color: var(--color-surface-input);
+            color: var(--color-text-heading);
+            font-weight: 500;
+            transition-property: all;
+            transition-duration: var(--transition-fast);
+            transition-timing-function: ease;
+            font-family: var(--font-sans);
+        }
+
+        .text-input-field::placeholder {
+            color: var(--color-text-disabled);
+            font-weight: 400;
+        }
+
+        .text-input-field:focus {
+            border-color: var(--color-accent-main);
+            background-color: var(--color-bg-card);
+            box-shadow: 0px 0px 0px 4px var(--color-accent-glow);
+        }
+
+        /* * Primary Submit Button 
+         */
+        .btn-submit-primary {
+            width: 100%;
+            padding-top: 18px;
+            padding-right: 18px;
+            padding-bottom: 18px;
+            padding-left: 18px;
+            background-color: var(--color-accent-main);
+            color: var(--color-text-white);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            border-bottom-left-radius: 12px;
+            margin-top: 10px;
+            transition-property: all;
+            transition-duration: var(--transition-fast);
+            transition-timing-function: ease;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0px 4px 10px rgba(37, 99, 235, 0.2);
+            font-family: var(--font-sans);
+        }
+
+        .btn-submit-primary:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0px 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-submit-primary:active {
+            transform: translateY(0px);
+        }
+
+        .btn-submit-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ----------------------------------------------------------------------------------
+           4.0 MAIN DASHBOARD SHELL
+           ---------------------------------------------------------------------------------- */
+        
+        /* Dashboard Container - Strictly hidden until login success */
+        #dashboard-viewport {
+            display: none;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition-property: opacity;
+            transition-duration: 0.5s;
+            transition-timing-function: ease;
+            flex-direction: row;
+        }
+
+        /* * Sidebar Navigation 
+         */
+        .dashboard-sidebar {
+            width: var(--layout-sidebar-width);
+            background-color: var(--color-brand-900);
+            color: var(--color-text-white);
+            display: flex;
+            flex-direction: column;
+            padding-top: 32px;
+            padding-right: 24px;
+            padding-bottom: 32px;
+            padding-left: 24px;
+            z-index: 100;
+            box-shadow: 4px 0px 24px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-brand-area {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .sidebar-brand-icon {
+            width: 42px;
+            height: 42px;
+            background-color: var(--color-accent-main);
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            border-bottom-left-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--color-text-white);
+            box-shadow: 0px 4px 15px var(--color-accent-glow);
+        }
+
+        .sidebar-brand-text {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--color-text-white);
+        }
+
+        .sidebar-navigation-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0%;
+        }
+
+        .nav-menu-item {
+            padding-top: 16px;
+            padding-right: 20px;
+            padding-bottom: 16px;
+            padding-left: 20px;
+            border-top-left-radius: var(--radius-md);
+            border-top-right-radius: var(--radius-md);
+            border-bottom-right-radius: var(--radius-md);
+            border-bottom-left-radius: var(--radius-md);
+            color: var(--color-text-disabled);
+            font-weight: 500;
+            cursor: pointer;
+            transition-property: all;
+            transition-duration: var(--transition-fast);
+            transition-timing-function: ease;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+            font-size: 1rem;
+            font-family: var(--font-sans);
+        }
+
+        .nav-menu-item:hover {
+            background-color: rgba(255,255,255,0.05);
+            color: var(--color-text-white);
+        }
+
+        .nav-menu-item.is-active {
+            background-color: var(--color-accent-main);
+            color: var(--color-text-white);
+            font-weight: 600;
+            box-shadow: 0px 4px 12px var(--color-accent-glow);
+        }
+
+        .nav-menu-item i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-footer-area {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* * Main Content Workspace 
+         */
+        .dashboard-main-content {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-bg-app);
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        /* Top Header Bar */
+        .dashboard-top-header {
+            height: var(--layout-header-height);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: var(--color-border-light);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0;
+            padding-right: var(--layout-padding);
+            padding-bottom: 0;
+            padding-left: var(--layout-padding);
+            z-index: 50;
+        }
+
+        .header-title-group h2 {
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            font-size: 1.6rem;
+            color: var(--color-text-heading);
+            font-family: var(--font-display);
+        }
+
+        .header-title-group p {
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .header-actions-group {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* System Clock */
+        .header-clock {
+            text-align: right;
+            display: none; /* Hidden on mobile */
+        }
+        @media (min-width: 768px) {
+            .header-clock { display: block; }
+        }
+
+        .clock-time-text {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-brand-900);
+        }
+
+        .clock-status-text {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-success-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* User Profile Dropdown Widget */
+        .header-user-widget {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+            padding-top: 6px;
+            padding-right: 16px;
+            padding-bottom: 6px;
+            padding-left: 6px;
+            background-color: var(--color-bg-card);
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-style: solid;
+            border-color: var(--color-border-light);
+            cursor: pointer;
+            transition-property: all;
+            transition-duration: var(--transition-fast);
+            transition-timing-function: ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-user-widget:hover {
+            border-color: var(--color-border-dark);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .widget-avatar {
+            width: 38px;
+            height: 38px;
+            background-color: var(--color-brand-900);
+            color: var(--color-text-white);
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: var(--font-sans);
+        }
+
+        .widget-user-info {
+            display: none;
+            flex-direction: column;
+            padding-right: 8px;
+        }
+        @media (min-width: 640px) {
+            .widget-user-info { display: flex; }
+        }
+
+        .widget-user-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--color-text-heading);
+            line-height: 1.2;
+        }
+
+        .widget-user-role {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Scrollable Workspace Area */
+        .dashboard-workspace {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-top: var(--layout-padding);
+            padding-right: var(--layout-padding);
+            padding-bottom: var(--layout-padding);
+            padding-left: var(--layout-padding);
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        /* ----------------------------------------------------------------------------------
+           5.0 REUSABLE DASHBOARD COMPONENTS
+           ---------------------------------------------------------------------------------- */
+        
+        /* Content Card */
+        .workspace-card {
+            background-color: var(--color-bg-card);
+            border-top-left-radius: var(--radius-lg);
+            border-top-right-radius: var(--radius-lg);
+            border-bottom-right-radius: var(--radius-lg);
+            border-bottom-left-radius: var(--radius-lg);
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-style: solid;
+            border-color: var(--color-border-light);
+            padding-top: 32px;
+            padding-right: 32px;
+            padding-bottom: 32px;
+            padding-left: 32px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-card);
+        }
+
+        /* KPI / Metric Grid */
+        .metric-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .metric-card-item {
+            background-color: var(--color-bg-card);
+            padding-top: 24px;
+            padding-right: 24px;
+            padding-bottom: 24px;
+            padding-left: 24px;
+            border-top-left-radius: var(--radius-md);
+            border-top-right-radius: var(--radius-md);
+            border-bottom-right-radius: var(--radius-md);
+            border-bottom-left-radius: var(--radius-md);
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 5px;
+            border-style: solid;
+            border-color: var(--color-border-light);
+            border-left-color: var(--color-brand-900);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .metric-card-item.theme-success { border-left-color: var(--color-success-main); }
+        .metric-card-item.theme-warning { border-left-color: var(--color-warning-main); }
+        .metric-card-item.theme-danger { border-left-color: var(--color-danger-main); }
+        .metric-card-item.theme-info { border-left-color: var(--color-info-main); }
+
+        .metric-item-title {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .metric-item-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-text-heading);
+            font-family: var(--font-display);
+            line-height: 1;
+        }
+
+        /* Progress Bars */
+        .metric-progress-bg {
+            width: 100%;
+            height: 6px;
+            background-color: var(--color-surface-hover);
+            border-top-left-radius: var(--radius-circle);
+            border-top-right-radius: var(--radius-circle);
+            border-bottom-right-radius: var(--radius-circle);
+            border-bottom-left-radius: var(--radius-circle);
+            margin-top: 20px;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .metric-progress-fill {
+            height: 100%;
+            border-top-left-radius: var(--radius-circle);
+            border-top-right-radius: var(--radius-circle);
+            border-bottom-right-radius: var(--radius-circle);
+            border-bottom-left-radius: var(--radius-circle);
+            transition-property: width;
+            transition-duration: 1s;
+            transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Advanced Filter Toolbar */
+        .action-filter-toolbar {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: flex-end;
+            background-color: var(--color-bg-app);
+            padding-top: 24px;
+            padding-right: 24px;
+            padding-bottom: 24px;
+            padding-left: 24px;
+            border-top-left-radius: var(--radius-md);
+            border-top-right-radius: var(--radius-md);
+            border-bottom-right-radius: var(--radius-md);
+            border-bottom-left-radius: var(--radius-md);
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-style: dashed;
+            border-color: var(--color-border-dark);
+            margin-bottom: 32px;
+            margin-top: 16px;
+        }
+
+        .filter-input-wrapper {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0%;
+            min-width: 200px;
+        }
+
+        /* Secondary Action Buttons */
+        .btn-secondary-action {
+            padding-top: 16px;
+            padding-right: 32px;
+            padding-bottom: 16px;
+            padding-left: 32px;
+            background-color: var(--color-brand-900);
+            color: var(--color-text-white);
+            font-weight: 600;
+            border-top-left-radius: var(--radius-md);
+            border-top-right-radius: var(--radius-md);
+            border-bottom-right-radius: var(--radius-md);
+            border-bottom-left-radius: var(--radius-md);
+            transition-property: all;
+            transition-duration: var(--transition-fast);
+            transition-timing-function: ease;
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-style: none;
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary-action:hover {
+            background-color: var(--color-brand-700);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-theme-success { background-color: var(--color-success-main); }
+        .btn-theme-success:hover { background-color: var(--color-success-dark); }
+
+        /* Data Tables */
+        .data-table-container {
+            width: 100%;
+            overflow-x: auto;
+            border-top-left-radius: var(--radius-md);
+            border-top-right-radius: var(--radius-md);
+            border-bottom-right-radius: var(--radius-md);
+            border-bottom-left-radius: var(--radius-md);
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-style: solid;
+            border-color: var(--color-border-light);
+            background-color: var(--color-bg-card);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .enterprise-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .enterprise-data-table th {
+            padding-top: 18px;
+            padding-right: 24px;
+            padding-bottom: 18px;
+            padding-left: 24px;
+            background-color: var(--color-bg-app);
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: var(--color-border-light);
+            white-space: nowrap;
+        }
+
+        .enterprise-data-table td {
+            padding-top: 18px;
+            padding-right: 24px;
+            padding-bottom: 18px;
+            padding-left: 24px;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: var(--color-border-light);
+            font-size: 1.05rem;
+            color: var(--color-text-heading);
+            vertical-align: middle;
+            font-weight: 500;
+        }
+
+        .enterprise-data-table tr:hover td {
+            background-color: var(--color-surface-hover);
+        }
+
+        .enterprise-data-table tr:last-child td {
+            border-bottom-style: none;
+        }
+
+        /* Badges & Chips */
+        .status-badge {
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding-top: 6px;
+            padding-right: 12px;
+            padding-bottom: 6px;
+            padding-left: 12px;
+            border-top-left-radius: var(--radius-circle);
+            border-top-right-radius: var(--radius-circle);
+            border-bottom-right-radius: var(--radius-circle);
+            border-bottom-left-radius: var(--radius-circle);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            min-width: 80px;
+        }
+
+        .badge-theme-success { background-color: var(--color-success-bg); color: var(--color-success-dark); border: 1px solid var(--color-success-border); }
+        .badge-theme-danger { background-color: var(--color-danger-bg); color: var(--color-danger-dark); border: 1px solid var(--color-danger-border); }
+        .badge-theme-warning { background-color: var(--color-warning-bg); color: var(--color-warning-dark); border: 1px solid var(--color-warning-border); }
+        .badge-theme-info { background-color: var(--color-info-bg); color: var(--color-info-main); border: 1px solid var(--color-info-border); }
+
+        .mono-chip {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 0.95rem;
+            background-color: var(--color-bg-app);
+            padding-top: 6px;
+            padding-right: 12px;
+            padding-bottom: 6px;
+            padding-left: 12px;
+            border-top-left-radius: var(--radius-sm);
+            border-top-right-radius: var(--radius-sm);
+            border-bottom-right-radius: var(--radius-sm);
+            border-bottom-left-radius: var(--radius-sm);
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-style: solid;
+            border-color: var(--color-border-dark);
+            color: var(--color-brand-800);
+        }
+
+        /* Interactive Attendance Radio Buttons */
+        .attendance-radio-input {
+            display: none;
+        }
+        
+        .attendance-radio-label {
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding-top: 10px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            border-top-left-radius: var(--radius-circle);
+            border-top-right-radius: var(--radius-circle);
+            border-bottom-right-radius: var(--radius-circle);
+            border-bottom-left-radius: var(--radius-circle);
+            cursor: pointer;
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-style: solid;
+            border-color: var(--color-border-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            background-color: var(--color-bg-card);
+            transition-property: all;
+            transition-duration: var(--transition-fast);
+            transition-timing-function: ease;
+            user-select: none;
+        }
+
+        .attendance-radio-label:hover {
+            background-color: var(--color-surface-hover);
+        }
+
+        input[value="Present"]:checked + .attendance-radio-label {
+            background-color: var(--color-success-bg);
+            color: var(--color-success-dark);
+            border-color: var(--color-success-main);
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.15);
+            transform: scale(1.02);
+        }
+
+        input[value="Absent"]:checked + .attendance-radio-label {
+            background-color: var(--color-danger-bg);
+            color: var(--color-danger-dark);
+            border-color: var(--color-danger-main);
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.15);
+            transform: scale(1.02);
+        }
+
+        .table-row-fault {
+            background-color: var(--color-danger-bg) !important;
+            transition-property: background-color;
+            transition-duration: 0.3s;
+            transition-timing-function: ease;
+        }
+
+        /* --- 6.0 SYSTEM STATES (Loaders, Empty States) --- */
+        .system-loading-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 100px;
+            padding-right: 20px;
+            padding-bottom: 100px;
+            padding-left: 20px;
+            color: var(--color-text-muted);
+        }
+
+        .system-spinner {
+            width: 56px;
+            height: 56px;
+            border-top-width: 4px;
+            border-right-width: 4px;
+            border-bottom-width: 4px;
+            border-left-width: 4px;
+            border-style: solid;
+            border-color: var(--color-border-light);
+            border-top-color: var(--color-accent-main);
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+            animation-name: spin;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            margin-bottom: 24px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .system-empty-state {
+            text-align: center;
+            padding-top: 100px;
+            padding-right: 20px;
+            padding-bottom: 100px;
+            padding-left: 20px;
+            color: var(--color-text-muted);
+            background-color: var(--color-bg-app);
+            border-top-width: 2px;
+            border-right-width: 2px;
+            border-bottom-width: 2px;
+            border-left-width: 2px;
+            border-style: dashed;
+            border-color: var(--color-border-dark);
+            border-top-left-radius: var(--radius-lg);
+            border-top-right-radius: var(--radius-lg);
+            border-bottom-right-radius: var(--radius-lg);
+            border-bottom-left-radius: var(--radius-lg);
+        }
+
+        .system-empty-icon {
+            font-size: 4rem;
+            color: var(--color-border-dark);
+            margin-bottom: 24px;
+        }
+
+        /* --- 7.0 OVERLAYS (Toasts & Modals) --- */
+        #notification-toast-layer {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .notification-toast-card {
+            min-width: 340px;
+            background-color: var(--color-bg-card);
+            padding-top: 20px;
+            padding-right: 24px;
+            padding-bottom: 20px;
+            padding-left: 24px;
+            border-top-left-radius: var(--radius-md);
+            border-top-right-radius: var(--radius-md);
+            border-bottom-right-radius: var(--radius-md);
+            border-bottom-left-radius: var(--radius-md);
+            box-shadow: var(--shadow-xl);
+            border-left-width: 5px;
+            border-left-style: solid;
+            border-left-color: var(--color-brand-900);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+            animation-name: slideInToast;
+            animation-duration: 0.4s;
+            animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes slideInToast {
+            from { transform: translateX(120%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .toast-status-success { border-left-color: var(--color-success-main); }
+        .toast-status-error { border-left-color: var(--color-danger-main); }
+        .toast-status-warning { border-left-color: var(--color-warning-main); }
+
+        .toast-icon-wrapper { font-size: 1.5rem; }
+        .toast-status-success .toast-icon-wrapper { color: var(--color-success-main); }
+        .toast-status-error .toast-icon-wrapper { color: var(--color-danger-main); }
+        .toast-status-warning .toast-icon-wrapper { color: var(--color-warning-main); }
+        
+        .toast-text-content {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-text-heading);
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+        }
+
+        /* Profile Modal */
+        #profile-modal-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color-overlay-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition-property: all;
+            transition-duration: 0.3s;
+            transition-timing-function: ease;
+        }
+
+        #profile-modal-overlay.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .profile-modal-card {
+            background-color: var(--color-bg-card);
+            width: 100%;
+            max-width: 480px;
+            border-top-left-radius: var(--radius-xl);
+            border-top-right-radius: var(--radius-xl);
+            border-bottom-right-radius: var(--radius-xl);
+            border-bottom-left-radius: var(--radius-xl);
+            padding-top: 48px;
+            padding-right: 48px;
+            padding-bottom: 48px;
+            padding-left: 48px;
+            box-shadow: var(--shadow-2xl);
+            transform: scale(0.95) translateY(20px);
+            transition-property: all;
+            transition-duration: 0.3s;
+            transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #profile-modal-overlay.is-visible .profile-modal-card {
+            transform: scale(1) translateY(0);
+        }
+        
+    </style>
+    </head>
+<body>
+
+    <div id="login-viewport">
+        
+        <div class="login-visual-panel">
+            
+            <div class="ambient-orb ambient-orb-primary"></div>
+            
+            <div class="ambient-orb ambient-orb-secondary"></div>
+            
+            <div class="visual-panel-content">
+                
+                <div class="visual-brand-logo">
+                    <i class="fas fa-university"></i>
+                </div>
+                
+ <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+</style>
+<h2 class="visual-panel-title" style="line-height: 1.2; color: #ffffff; font-family: 'Pacifico', cursive; font-size: 5rem; font-weight: 400; margin-bottom: 15px; letter-spacing: 2px;">
+    EduTrack<br>
+    <span style="font-size: 1.2rem; font-weight: 500; opacity: 0.85; color: #ffffff; font-family: var(--font-sans); display: block; margin-top: 5px; letter-spacing: normal;">Smart Attendance & Analytics</span>
+</h2>
+                
+                <div class="feature-pill-container">
+                    
+                    <div class="feature-pill">
+                        <i class="fas fa-shield-alt"></i> 
+                        Enterprise Security
+                    </div>
+                    
+                    <div class="feature-pill">
+                        <i class="fas fa-bolt"></i> 
+                        Real-time Sync
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="visual-panel-footer">
+               
+            </div>
+            
+        </div>
+
+        <div class="login-form-panel">
+            
+            <div class="login-form-card">
+                
+                <div class="login-form-header">
+                    <h1>Welcome Back</h1>
+                    <p>Please select your access role and verify your credentials to continue.</p>
+                </div>
+
+                <form id="system-auth-form">
+                    
+                    <div class="role-selection-group">
+                        
+                        <label class="input-label">Select Role</label>
+                        
+                        <div class="role-selection-grid">
+                            
+                            <div 
+                                class="role-option-card is-active" 
+                                data-role="student" 
+                                onclick="AuthenticationEngine.setActiveRole('student', this)"
+                            >
+                                <i class="fas fa-user-graduate"></i>
+                                <span>Student</span>
+                            </div>
+                            
+                            <div 
+                                class="role-option-card" 
+                                data-role="teacher" 
+                                onclick="AuthenticationEngine.setActiveRole('teacher', this)"
+                            >
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Faculty</span>
+                            </div>
+                            
+                            <div 
+                                class="role-option-card" 
+                                data-role="hod" 
+                                onclick="AuthenticationEngine.setActiveRole('hod', this)"
+                            >
+                                <i class="fas fa-briefcase"></i>
+                                <span>Dept Head</span>
+                            </div>
+                            
+                            <div 
+                                class="role-option-card" 
+                                data-role="principal" 
+                                onclick="AuthenticationEngine.setActiveRole('principal', this)"
+                            >
+                                <i class="fas fa-university"></i>
+                                <span>Principal</span>
+                            </div>
+                            
+                        </div>
+                        
+                        <input 
+                            type="hidden" 
+                            id="auth-role-value" 
+                            value="student"
+                        >
+                        
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">System Identifier (Username)</label>
+                        <input 
+                            type="text" 
+                            id="auth-username" 
+                            class="text-input-field" 
+                            placeholder="Enter ID (e.g. fac1)" 
+                            required 
+                            autocomplete="off"
+                        >
+                    </div>
+
+                    <div class="input-group" style="margin-bottom: 32px;">
+                        <label class="input-label">Secure Password</label>
+                        <input 
+                            type="password" 
+                            id="auth-password" 
+                            class="text-input-field" 
+                            placeholder="••••••••" 
+                            required
+                        >
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="btn-submit-primary" 
+                        id="auth-submit-btn"
+                    >
+                        Authenticate & Access 
+                        <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </button>
+                    
+                </form>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div id="dashboard-viewport">
+        
+        <aside class="dashboard-sidebar">
+            
+            <div class="sidebar-brand-area">
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div class="sidebar-brand-text">
+                    EduTrack
+                </div>
+            </div>
+            
+            <nav class="sidebar-navigation-menu" id="dynamic-sidebar-menu"></nav>
+            
+            <div class="sidebar-footer-area">
+                
+                <div class="nav-menu-item" onclick="UserInterfaceEngine.toggleModal(true)">
+                    <i class="fas fa-cog"></i> 
+                    <span>Settings</span>
+                </div>
+                
+                <div class="nav-menu-item" onclick="AuthenticationEngine.terminateSession()" style="color: #ef4444;">
+                    <i class="fas fa-sign-out-alt"></i> 
+                    <span>Log Out</span>
+                </div>
+                
+            </div>
+            
+        </aside>
+
+        <main class="dashboard-main-content">
+            
+            <header class="dashboard-top-header">
+                
+                <div class="header-title-group">
+                    <h2 id="header-main-title">Loading...</h2>
+                    <p id="header-sub-title">Please wait.</p>
+                </div>
+                
+                <div class="header-actions-group">
+                    
+                    <div class="header-clock">
+                        <div id="header-clock-time" class="clock-time-text">00:00</div>
+                        <div class="clock-status-text">
+                            <i class="fas fa-circle" style="font-size: 6px;"></i> 
+                            Online
+                        </div>
+                    </div>
+                    
+                    <div class="header-user-widget" onclick="UserInterfaceEngine.toggleModal(true)">
+                        
+                        <div class="widget-avatar" id="header-user-initial">U</div>
+                        
+                        <div class="widget-user-info">
+                            <span id="header-user-name" class="widget-user-name">Loading...</span>
+                            <span id="header-user-role" class="widget-user-role">Access</span>
+                        </div>
+                        
+                        <i class="fas fa-chevron-down" style="font-size: 0.75rem; color: var(--color-text-muted); margin-left: 4px; margin-right: 4px;"></i>
+                        
+                    </div>
+                    
+                </div>
+                
+            </header>
+            
+            <div class="dashboard-workspace" id="dashboard-workspace-area">
+                
+                <div class="system-loading-view">
+                    <div class="system-spinner"></div>
+                    <h3 style="color: var(--color-primary-900); font-family: var(--font-display); font-weight: 700; margin-bottom: 8px;">
+                        Please Wait
+                    </h3>
+                    <p style="font-size: 1rem;">
+                        Establishing Server Connection...
+                    </p>
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
+
+    <div id="notification-toast-layer"></div>
+    
+    <div id="profile-modal-overlay">
+        
+        <div class="profile-modal-card">
+            
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
+                <h3 style="margin:0; font-size: 1.5rem; color: var(--color-text-heading); font-family: var(--font-display);">
+                    My Profile
+                </h3>
+                <button onclick="UserInterfaceEngine.toggleModal(false)" style="color: var(--color-text-muted); transition: color 0.2s;">
+                    <i class="fas fa-times" style="font-size: 1.4rem;"></i>
+                </button>
+            </div>
+            
+            <div style="text-align:center; margin-bottom: 24px;">
+                
+                <div style="width: 80px; height: 80px; background-color: var(--color-accent-main); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; margin: 0 auto 12px; box-shadow: 0 10px 20px var(--color-accent-glow);" id="modal-user-initial-large">
+                    U
+                </div>
+                
+                <h2 id="modal-full-name" style="margin-bottom: 8px; font-size: 1.5rem; font-family: var(--font-display);">
+                    Retrieving Name...
+                </h2>
+                
+                <div class="status-badge badge-theme-info" id="modal-role-badge">
+                    ACCESS TIER
+                </div>
+                
+            </div>
+            
+            <div style="background-color: var(--color-bg-app); padding: 20px; border-radius: var(--radius-md); border: 1px dashed var(--color-border-dark); margin-bottom: 24px;">
+                
+                <div style="display: flex; justify-content: space-between; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--color-border-dark);">
+                    <span style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-muted);">
+                        System ID
+                    </span>
+                    <span id="modal-system-id" class="mono-chip">
+                        ...
+                    </span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-muted);">
+                        Department
+                    </span>
+                    <span id="modal-dept-name" style="font-weight: 600; font-size: 0.95rem; color: var(--color-text-heading);">
+                        ...
+                    </span>
+                </div>
+                
+            </div>
+            
+            <button class="btn-secondary-action" style="width: 100%; background-color: white; color: var(--color-text-heading); border: 1px solid var(--color-border-dark);" onclick="UserInterfaceEngine.toggleModal(false)">
+                Close Window
+            </button>
+            
+        </div>
+        
+    </div>
+
+    <script>
+        /**
+         * @fileoverview Enterprise Client Application Logic
+         * @version 800.0.0 Titanium Uncompressed Build
+         * @author EduTrack Core Team
+         */
+
+        /**
+         * ====================================================================
+         * SECTION 1: SYSTEM CONFIGURATION & CONSTANTS
+         * ====================================================================
+         * Immutable configuration objects controlling application behavior.
+         */
+        const SYSTEM_CONFIG = Object.freeze({
+            /**
+             * The root URL for all backend database transactions.
+             * @type {string}
+             */
+            API_ENDPOINT: 'http://localhost:3000/api',
+            
+            /**
+             * Enables detailed console logging for debugging network states.
+             * @type {boolean}
+             */
+            DEBUG_VERBOSITY: true,
+            
+            /**
+             * Dictionary mapping integer IDs to fully qualified department names.
+             * @type {Object}
+             */
+            DEPARTMENT_DICTIONARY: Object.freeze({
+                1: "Computer Science",
+                2: "Electronics & Comm",
+                3: "Mechanical Engineering",
+                4: "Information Technology",
+                5: "Electrical (EEE)"
+            })
+        });
+
+        /**
+         * ====================================================================
+         * SECTION 2: GLOBAL STATE MANAGEMENT
+         * ====================================================================
+         * Encapsulated singleton pattern to protect session data in memory.
+         */
+        class ApplicationState {
+            
+            /** * Internal reference to the authenticated user object.
+             * @private 
+             * @type {Object|null}
+             */
+            #currentUserRecord = null;
+            
+            /** * Pre-computed ISO date string for calendar defaults.
+             * @private 
+             * @type {string}
+             */
+            #systemDateString = new Date().toISOString().split('T')[0];
+
+            /**
+             * Injects securely verified user object into memory heap.
+             * @param {Object} userData Payload returned from authentication endpoint.
+             * @returns {void}
+             */
+            initializeSession(userData) {
+                if (userData) {
+                    this.#currentUserRecord = Object.freeze({ ...userData });
+                }
+            }
+
+            /**
+             * Safely retrieves the current user session context.
+             * @returns {Object|null}
+             */
+            getSessionContext() {
+                return this.#currentUserRecord;
+            }
+
+            /**
+             * Returns the formatted YYYY-MM-DD string representing today.
+             * @returns {string}
+             */
+            getSystemDate() {
+                return this.#systemDateString;
+            }
+
+            /**
+             * Resolves the integer department ID to its string equivalent.
+             * @returns {string} The fully qualified department name.
+             */
+            resolveDepartmentName() {
+                if (this.#currentUserRecord === null) {
+                    return "Administration";
+                }
+                const deptId = this.#currentUserRecord.dept_id;
+                return SYSTEM_CONFIG.DEPARTMENT_DICTIONARY[deptId] || "General Branch";
+            }
+        }
+
+        // Initialize Singleton Instance of State Manager
+        const AppMemory = new ApplicationState();
+
+        /**
+         * ====================================================================
+         * SECTION 3: NETWORK LAYER (API CLIENT)
+         * ====================================================================
+         * Abstracted Fetch wrapper to standardize headers, JSON parsing, 
+         * and catastrophic failure handling.
+         */
+        class NetworkTransmitter {
+            
+            /**
+             * Executes an asynchronous POST payload to the remote server.
+             * @param {string} relativePath - The endpoint path (e.g., '/student/stats')
+             * @param {Object} payload - The JSON serializable data body.
+             * @returns {Promise<Object>} The resolved and parsed JSON response.
+             * @throws {Error} If connection is refused or server faults.
+             */
+            static async executePost(relativePath, payload) {
+                if (SYSTEM_CONFIG.DEBUG_VERBOSITY) {
+                    console.log(`[NETWORK TX] POST -> ${relativePath}`, payload);
+                }
+
+                try {
+                    const fullUrl = `${SYSTEM_CONFIG.API_ENDPOINT}${relativePath}`;
+                    
+                    const response = await fetch(fullUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok === false) {
+                        throw new Error(`Server Error: ${response.status}`);
+                    }
+
+                    const jsonResult = await response.json();
+                    return jsonResult;
+
+                } catch (exception) {
+                    console.error(`[NETWORK FATAL] ${relativePath}:`, exception);
+                    throw new Error("Unable to connect to database. Please check your connection.");
+                }
+            }
+
+            /**
+             * Executes an asynchronous GET request to the remote server.
+             * @param {string} relativePath - The endpoint path including query parameters.
+             * @returns {Promise<Object>} The resolved and parsed JSON response.
+             * @throws {Error} If connection is refused or server faults.
+             */
+            static async executeGet(relativePath) {
+                if (SYSTEM_CONFIG.DEBUG_VERBOSITY) {
+                    console.log(`[NETWORK RX] GET -> ${relativePath}`);
+                }
+
+                try {
+                    const fullUrl = `${SYSTEM_CONFIG.API_ENDPOINT}${relativePath}`;
+                    
+                    const response = await fetch(fullUrl);
+
+                    if (response.ok === false) {
+                        throw new Error(`Server Error: ${response.status}`);
+                    }
+
+                    const jsonResult = await response.json();
+                    return jsonResult;
+
+                } catch (exception) {
+                    console.error(`[NETWORK FATAL] ${relativePath}:`, exception);
+                    throw new Error("Failed to retrieve data from server.");
+                }
+            }
+        }
+
+        /**
+         * ====================================================================
+         * SECTION 4: USER INTERFACE ENGINE (DOM MANIPULATION)
+         * ====================================================================
+         * Contains static methods for generating alerts, loading skeletons,
+         * and managing global overlays without duplicating code in modules.
+         */
+        class UserInterfaceEngine {
+            
+            /**
+             * Generates a self-destructing toast notification alert.
+             * @param {string} messageText - The body of the alert.
+             * @param {string} statusTier - 'success', 'error', or 'warning'.
+             * @returns {void}
+             */
+            static triggerAlert(messageText, statusTier = 'success') {
+                const toastLayer = document.getElementById('notification-toast-layer');
+                if (toastLayer === null) return;
+
+                const notificationCard = document.createElement('div');
+                notificationCard.className = `notification-toast-card toast-status-${statusTier}`;
+                
+                // Icon resolution logic
+                let fontAwesomeClass = 'fa-check-circle';
+                if (statusTier === 'error') fontAwesomeClass = 'fa-exclamation-circle';
+                if (statusTier === 'warning') fontAwesomeClass = 'fa-exclamation-triangle';
+
+                const cardContent = `
+                    <div class="toast-icon-wrapper">
+                        <i class="fas ${fontAwesomeClass}"></i>
+                    </div>
+                    <div>
+                        <p class="toast-text-content">${messageText}</p>
+                    </div>
+                `;
+                
+                notificationCard.innerHTML = cardContent;
+                toastLayer.appendChild(notificationCard);
+
+                // Garbage Collection Sequence
+                setTimeout(() => {
+                    notificationCard.style.opacity = '0';
+                    notificationCard.style.transform = 'translateX(100%)';
+                    
+                    setTimeout(() => {
+                        if (toastLayer.contains(notificationCard)) {
+                            toastLayer.removeChild(notificationCard);
+                        }
+                    }, 400); 
+                }, 4000); 
+            }
+
+            /**
+             * Injects a formalized loading spinner into a target container.
+             * @param {string} containerId - The DOM element ID to overwrite.
+             * @param {string} contextualMessage - Text to display under spinner.
+             * @returns {void}
+             */
+            static renderProcessingState(containerId, contextualMessage = "Loading data...") {
+                const containerNode = document.getElementById(containerId);
+                
+                if (containerNode !== null) {
+                    const loaderHTML = `
+                        <div class="system-loading-view">
+                            <div class="system-spinner"></div>
+                            <h3 style="color: var(--color-text-heading); font-family: var(--font-display); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; font-size: 1.3rem;">Please Wait</h3>
+                            <p style="margin-bottom: 1rem; font-size: 1rem;">${contextualMessage}</p>
+                        </div>
+                    `;
+                    containerNode.innerHTML = loaderHTML;
+                }
+            }
+
+            /**
+             * Injects a stylized empty state when no records are returned.
+             * @param {string} containerId - The DOM element ID to overwrite.
+             * @param {string} fontAwesomeIcon - E.g., 'fa-ghost' or 'fa-box-open'.
+             * @param {string} titleText - Bold title text.
+             * @param {string} contextualMessage - Text to explain the empty state.
+             * @returns {void}
+             */
+            static renderVoidState(containerId, fontAwesomeIcon, titleText, contextualMessage) {
+                const containerNode = document.getElementById(containerId);
+                
+                if (containerNode !== null) {
+                    const voidHTML = `
+                        <div class="system-empty-state">
+                            <i class="fas ${fontAwesomeIcon} system-empty-icon"></i>
+                            <h3 style="color: var(--color-text-heading); margin-bottom: 8px; font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; font-size: 1.4rem;">${titleText}</h3>
+                            <p style="font-size: 1rem; max-width: 600px; margin: 0 auto;">${contextualMessage}</p>
+                        </div>
+                    `;
+                    containerNode.innerHTML = voidHTML;
+                }
+            }
+
+            /**
+             * Toggles the visibility of the User Identity Modal.
+             * @param {boolean} forceShow - True opens, False closes.
+             * @returns {void}
+             */
+            static toggleModal(forceShow) {
+                const modalOverlay = document.getElementById('profile-modal-overlay');
+                
+                if (modalOverlay !== null) {
+                    if (forceShow === true) {
+                        modalOverlay.classList.add('is-visible');
+                    } else {
+                        modalOverlay.classList.remove('is-visible');
+                    }
+                }
+            }
+
+            /**
+             * Bootstraps the application clock in the header.
+             * @returns {void}
+             */
+            static bootChronometer() {
+                const clockNode = document.getElementById('header-clock-time');
+                
+                if (clockNode === null) return;
+
+                const tickChronometer = () => {
+                    const timeObject = new Date();
+                    
+                    const formattedTime = timeObject.toLocaleString('en-US', {
+                        weekday: 'short', 
+                        month: 'short', 
+                        day: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit', 
+                        hour12: true
+                    });
+                    
+                    clockNode.innerText = formattedTime;
+                };
+                
+                tickChronometer(); 
+                setInterval(tickChronometer, 60000); 
+            }
+        }
+
+        /**
+         * ====================================================================
+         * SECTION 5: AUTHENTICATION CONTROLLER
+         * ====================================================================
+         * Manages credential submission, validation, and session lifecycle.
+         */
+        class AuthenticationEngine {
+            
+            /**
+             * Updates visual state of role selector cards prior to submission.
+             * Matches the exact styling from the reference photo.
+             * @param {string} targetRole - Expected backend role string.
+             * @param {HTMLElement} domElement - The card clicked by the user.
+             * @returns {void}
+             */
+            static setActiveRole(targetRole, domElement) {
+                const hiddenInput = document.getElementById('auth-role-value');
+                
+                if (hiddenInput !== null) {
+                    hiddenInput.value = targetRole;
+                }
+                
+                const allCards = document.querySelectorAll('.role-option-card');
+                
+                allCards.forEach(card => {
+                    card.classList.remove('is-active');
+                });
+                
+                if (domElement !== null) {
+                    domElement.classList.add('is-active');
+                }
+            }
+
+            /**
+             * Asynchronous handler for the main login form.
+             * Collects data, disables UI to prevent spam, and parses network response.
+             * @param {Event} submitEvent - The standard DOM form event.
+             * @returns {Promise<void>}
+             */
+            static async processLoginSequence(submitEvent) {
+                submitEvent.preventDefault(); 
+                
+                const triggerButton = document.getElementById('auth-submit-btn');
+                
+                if (triggerButton === null) return;
+                
+                const originalButtonHTML = triggerButton.innerHTML;
+                
+                // Engage UI Lock
+                triggerButton.innerHTML = `<i class="fas fa-circle-notch fa-spin" style="margin-right: 8px;"></i> Authenticating...`;
+                triggerButton.disabled = true;
+
+                // Construct Data Payload
+                const usernameInput = document.getElementById('auth-username').value;
+                const passwordInput = document.getElementById('auth-password').value;
+                const roleInput = document.getElementById('auth-role-value').value;
+                
+                const credentialPayload = {
+                    username: usernameInput.trim(),
+                    password: passwordInput.trim(),
+                    role: roleInput
+                };
+
+                try {
+                    // Transmit to Database
+                    const serverResponse = await NetworkTransmitter.executePost('/login', credentialPayload);
+                    
+                    if (serverResponse.status === 'success') {
+                        // Establish Secure Memory Session
+                        AppMemory.initializeSession(serverResponse.user);
+                        
+                        const extractedFirstName = serverResponse.user.full_name.split(' ')[0];
+                        UserInterfaceEngine.triggerAlert(`Login successful. Welcome, ${extractedFirstName}.`, 'success');
+                        
+                        // Execute UI Cross-Fade Transition
+                        const layerLogin = document.getElementById('login-viewport');
+                        const layerApp = document.getElementById('dashboard-viewport');
+                        
+                        if (layerLogin !== null && layerApp !== null) {
+                            layerLogin.style.opacity = '0';
+                            
+                            setTimeout(() => {
+                                layerLogin.style.display = 'none';
+                                layerApp.style.display = 'flex';
+                                
+                                requestAnimationFrame(() => {
+                                    layerApp.style.opacity = '1';
+                                });
+                                
+                                ApplicationRouter.bootstrapEnvironment();
+                                
+                            }, 500); 
+                        }
+                        
+                    } else {
+                        // Logic Fault 
+                        const errMessage = serverResponse.message || 'Incorrect Username or Password.';
+                        UserInterfaceEngine.triggerAlert(errMessage, 'error');
+                        AuthenticationEngine.releaseButtonLock(triggerButton, originalButtonHTML);
+                    }
+                    
+                } catch (networkException) {
+                    // Fatal Network Fault
+                    UserInterfaceEngine.triggerAlert(networkException.message, 'error');
+                    AuthenticationEngine.releaseButtonLock(triggerButton, originalButtonHTML);
+                }
+            }
+
+            /**
+             * Helper method to restore button state after failure.
+             * @param {HTMLElement} buttonElement 
+             * @param {string} originalHTML 
+             * @returns {void}
+             */
+            static releaseButtonLock(buttonElement, originalHTML) {
+                if (buttonElement !== null) {
+                    buttonElement.innerHTML = originalHTML;
+                    buttonElement.disabled = false;
+                }
+            }
+
+            /**
+             * Safely terminates session and clears memory heap by reloading document.
+             * @returns {void}
+             */
+            static terminateSession() {
+                const promptValue = confirm("Are you sure you want to log out?");
+                if (promptValue === true) {
+                    window.location.reload(); 
+                }
+            }
+        }
+
+        // Attach global listener to authentication form upon DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            const authFormElement = document.getElementById('system-auth-form');
+            if (authFormElement !== null) {
+                authFormElement.addEventListener('submit', AuthenticationEngine.processLoginSequence);
+            }
+            UserInterfaceEngine.bootChronometer();
+        });
+
+        /**
+         * ====================================================================
+         * SECTION 6: APPLICATION ROUTER (View Controller)
+         * ====================================================================
+         * Responsible for reading user roles, generating the correct sidebar,
+         * and mapping sidebar clicks to specific Javascript Modules.
+         */
+        class ApplicationRouter {
+            
+            /**
+             * Called immediately after successful login transition.
+             * Populates global header/modal text and builds the navigation tree.
+             * @returns {void}
+             */
+            static bootstrapEnvironment() {
+                const sessionContext = AppMemory.getSessionContext();
+                
+                if (sessionContext === null) return; 
+                
+                // 1. Calculate String Variables
+                const firstNameOnly = sessionContext.full_name.split(' ')[0];
+                const charInitial = sessionContext.full_name.charAt(0).toUpperCase();
+                const normalizedRole = sessionContext.role.toUpperCase();
+                
+                // 2. Populate Header Bar Widgets
+                const avatarNode = document.getElementById('header-user-initial');
+                const nameNode = document.getElementById('header-user-name');
+                const roleNode = document.getElementById('header-user-role');
+                
+                if (avatarNode) avatarNode.innerText = charInitial;
+                if (nameNode) nameNode.innerText = firstNameOnly;
+                if (roleNode) roleNode.innerText = normalizedRole;
+                
+                // 3. Populate Hidden Profile Modal Widgets
+                const modalAvatar = document.getElementById('modal-user-initial-large');
+                const modalFullName = document.getElementById('modal-full-name');
+                const modalRoleBadge = document.getElementById('modal-role-badge');
+                const modalSystemId = document.getElementById('modal-system-id');
+                const modalDept = document.getElementById('modal-dept-name');
+                
+                if (modalAvatar) modalAvatar.innerText = charInitial;
+                if (modalFullName) modalFullName.innerText = sessionContext.full_name;
+                if (modalRoleBadge) modalRoleBadge.innerText = `${normalizedRole} ACCESS`;
+                if (modalSystemId) modalSystemId.innerText = sessionContext.username;
+                
+               let deptDisplay = 'Administration';
+
+// Force Global Admin status if the user is the Principal
+if (sessionContext.role === 'principal') {
+    deptDisplay = 'Global Administration (All Departments)';
+} 
+// Otherwise, load their specific department
+else if (sessionContext.dept_id !== null && sessionContext.dept_id !== undefined) {
+    deptDisplay = `Dept ${sessionContext.dept_id} (${AppMemory.resolveDepartmentName()})`;
+}
+
+if (modalDept) modalDept.innerText = deptDisplay;
+                // 4. Build Context-Aware Navigation
+                ApplicationRouter.constructNavigationTree(sessionContext.role);
+            }
+
+            /**
+             * Generates HTML for sidebar buttons based on Role-Based Access Control (RBAC).
+             * @param {string} userRole - e.g., 'student', 'hod'.
+             * @returns {void}
+             */
+            static constructNavigationTree(userRole) {
+                const navigationContainer = document.getElementById('dynamic-sidebar-menu');
+                
+                if (navigationContainer === null) return;
+                
+                // Master Definitions for Application Modules
+                const moduleBlueprints = {
+                    student: [
+                        { id: 'analytics', icon: 'fa-chart-pie', label: 'Overall Percentage' },
+                        { id: 'history', icon: 'fa-calendar-alt', label: 'Attendance History' }
+                    ],
+                    teacher: [
+                        { id: 'register', icon: 'fa-check-square', label: 'Mark Attendance' }
+                    ],
+                    hod: [
+                        { id: 'overview', icon: 'fa-chart-bar', label: 'Department Stats' },
+                        { id: 'search', icon: 'fa-users', label: 'Student Search' }
+                    ],
+                    principal: [
+                        { id: 'global', icon: 'fa-globe', label: 'College Overview' },
+                        { id: 'directory', icon: 'fa-search', label: 'Global Search' }
+                    ]
+                };
+
+                const currentBlueprint = moduleBlueprints[userRole];
+                
+                if (currentBlueprint === undefined) {
+                    console.error("[ROUTER FATAL] Unrecognized RBAC parameter applied.");
+                    return;
+                }
+
+                // Compile DOM Nodes
+                let compiledHTML = '';
+                
+                currentBlueprint.forEach((module, index) => {
+                    const isActiveClass = index === 0 ? 'is-active' : '';
+                    
+                    compiledHTML += `
+                        <div class="nav-menu-item ${isActiveClass}" id="nav-btn-${module.id}" onclick="ApplicationRouter.switchModule('${userRole}', '${module.id}')">
+                            <i class="fas ${module.icon}"></i> 
+                            <span>${module.label}</span>
+                        </div>
+                    `;
+                });
+
+                navigationContainer.innerHTML = compiledHTML;
+
+                // Auto-trigger the first module in the array
+                const firstModuleId = currentBlueprint[0].id;
+                ApplicationRouter.switchModule(userRole, firstModuleId);
+            }
+
+            /**
+             * Core routing function. Modifies UI state and invokes correct Class methods.
+             * @param {string} roleContext - The user's role.
+             * @param {string} targetModuleId - The requested view identifier.
+             * @returns {void}
+             */
+            static switchModule(roleContext, targetModuleId) {
+                
+                // 1. Update visual active state in sidebar using explicit classes
+                const allSidebarLinks = document.querySelectorAll('.nav-menu-item');
+                
+                allSidebarLinks.forEach(button => {
+                    button.classList.remove('is-active');
+                });
+                
+                const targetNode = document.getElementById(`nav-btn-${targetModuleId}`);
+                
+                if (targetNode !== null) {
+                    targetNode.classList.add('is-active');
+                }
+
+                // 2. Traffic Controller Switch Statement
+                switch (roleContext) {
+                    case 'student':
+                        if (targetModuleId === 'analytics') {
+                            StudentSubsystem.renderAnalyticsView();
+                        } else if (targetModuleId === 'history') {
+                            StudentSubsystem.renderHistoryView();
+                        }
+                        break;
+                    
+                    case 'teacher':
+                        if (targetModuleId === 'register') {
+                            FacultySubsystem.renderAttendanceWorkspace();
+                        }
+                        break;
+                    
+                    case 'hod':
+                        if (targetModuleId === 'overview') {
+                            AdministrativeSubsystem.renderDepartmentAnalytics();
+                        } else if (targetModuleId === 'search') {
+                            AdministrativeSubsystem.renderDeepSearchInterface('hod');
+                        }
+                        break;
+                    
+                    case 'principal':
+                        if (targetModuleId === 'global') {
+                            AdministrativeSubsystem.renderGlobalAnalytics();
+                        } else if (targetModuleId === 'directory') {
+                            AdministrativeSubsystem.renderDeepSearchInterface('principal');
+                        }
+                        break;
+                    
+                    default:
+                        console.warn(`[ROUTER WARNING] Abandoned route: ${roleContext}/${targetModuleId}`);
+                }
+            }
+
+            /**
+             * Updates the persistent header text strings.
+             * @param {string} primaryTitle - e.g., "Overall Percentage"
+             * @param {string} secondarySubtitle - e.g., "View your attendance status..."
+             * @returns {void}
+             */
+            static mutateHeaderStrings(primaryTitle, secondarySubtitle) {
+                const titleElement = document.getElementById('header-main-title');
+                const subtitleElement = document.getElementById('header-sub-title');
+                
+                if (titleElement !== null) {
+                    titleElement.innerText = primaryTitle;
+                }
+                
+                if (subtitleElement !== null) {
+                    subtitleElement.innerText = secondarySubtitle;
+                }
+            }
+        }
+
+        /**
+         * ====================================================================
+         * MODULE 1: FACULTY SUBSYSTEM
+         * ====================================================================
+         * Purpose: Handles the complex UI for filtering, loading, rendering,
+         * validating, and commiting attendance rosters to the database.
+         */
+        class FacultySubsystem {
+            
+            /**
+             * Entry point: Renders the configuration shell and KPI widgets.
+             * @returns {void}
+             */
+            static renderAttendanceWorkspace() {
+                ApplicationRouter.mutateHeaderStrings("Mark Attendance", "Select a class and date to take attendance.");
+                
+                const userContext = AppMemory.getSessionContext();
+                const workspaceNode = document.getElementById('dashboard-workspace-area');
+
+                if (workspaceNode === null) return;
+
+                const deptNameStr = AppMemory.resolveDepartmentName();
+                const currentDateStr = AppMemory.getSystemDate();
+
+                const interfaceTemplate = `
+                    <div class="metric-cards-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        
+                        <div class="metric-card-item theme-info">
+                            <div class="metric-item-title">My Department</div>
+                            <div class="metric-item-value">Dept ${userContext.dept_id}</div>
+                            <div style="font-weight: 600; color: var(--color-text-muted); font-size: 0.95rem; margin-top: 16px; font-family: var(--font-sans);">
+                                <i class="fas fa-building" style="margin-right: 8px;"></i> ${deptNameStr}
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card-item theme-success">
+                            <div class="metric-item-title">System Status</div>
+                            <div class="metric-item-value" style="color: var(--color-success-main);">Ready</div>
+                            <div style="font-weight: 600; color: var(--color-text-muted); font-size: 0.95rem; margin-top: 16px; font-family: var(--font-sans);">
+                                <i class="fas fa-wifi" style="margin-right: 8px;"></i> Connected to Server
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workspace-card">
+                        <div style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--color-border-light);">
+                            <h3 style="color: var(--color-text-heading); margin-bottom: 4px; font-family: var(--font-display);"><i class="fas fa-sliders-h" style="color: var(--color-accent-main); margin-right: 12px;"></i> Class Details</h3>
+                            <p style="color: var(--color-text-muted); font-size: 0.95rem; margin: 0; font-family: var(--font-sans);">Select the academic year to load the subject list.</p>
+                        </div>
+                        
+                        <div class="action-filter-toolbar">
+                            <div class="filter-input-wrapper">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); font-family: var(--font-sans);">Year / Batch</label>
+                                <select id="config-year-select" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; color: var(--color-text-heading); font-family: var(--font-sans); cursor: pointer;" onchange="FacultySubsystem.invokeSubjectMetadata()">
+                                    <option value="" disabled selected>Select Year...</option>
+                                    <option value="1">1st Year</option>
+                                    <option value="2">2nd Year</option>
+                                    <option value="3">3rd Year</option>
+                                    <option value="4">4th Year</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-input-wrapper" style="flex-grow: 2;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); font-family: var(--font-sans);">Subject</label>
+                                <select id="config-subject-select" style="width: 100%; padding: 14px 16px; background-color: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; color: var(--color-text-heading); font-family: var(--font-sans); cursor: pointer;">
+                                    <option value="" disabled selected>Waiting for Year selection...</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-input-wrapper">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); font-family: var(--font-sans);">Date</label>
+                                <input type="date" id="config-date-input" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; color: var(--color-text-heading); font-family: var(--font-mono); cursor: pointer;" value="${currentDateStr}">
+                            </div>
+                            
+                            <button class="btn-secondary-action" onclick="FacultySubsystem.executeRosterRetrieval()" style="height: 52px; font-size: 0.95rem; padding: 0 28px;">
+                                <i class="fas fa-search"></i> Load Class
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="workspace-card" id="data-render-zone" style="min-height: 350px; padding: 0; display: flex; flex-direction: column;">
+                        <div class="system-empty-state" style="border: none; background: transparent; flex-grow: 1;">
+                            <i class="fas fa-clipboard-list system-empty-icon"></i>
+                            <h3 style="color: var(--color-text-heading); margin-bottom: 8px; font-family: var(--font-display); font-weight: 700;">Student Register</h3>
+                            <p>The student list will appear here once you load the class.</p>
+                        </div>
+                    </div>
+                `;
+                
+                workspaceNode.innerHTML = interfaceTemplate;
+            }
+
+            /**
+             * Triggered via dropdown 'onchange'. Fetches mapped subjects from DB.
+             * @returns {Promise<void>}
+             */
+            static async invokeSubjectMetadata() {
+                const yearParameter = document.getElementById('config-year-select').value;
+                const dropdownNode = document.getElementById('config-subject-select');
+                
+                if (dropdownNode === null) return;
+                
+                const sessionContext = AppMemory.getSessionContext();
+
+                dropdownNode.innerHTML = '<option disabled selected>Loading subjects...</option>';
+                
+                try {
+                    const relativePath = `/metadata/subjects?dept_id=${sessionContext.dept_id}&year=${yearParameter}`;
+                    const subjectArray = await NetworkTransmitter.executeGet(relativePath);
+                    
+                    if (subjectArray.length === 0) {
+                        dropdownNode.innerHTML = '<option disabled selected>No subjects found for this year.</option>';
+                        return;
+                    }
+                    
+                    let newOptionsHTML = '<option value="" disabled selected>Select Subject</option>';
+                    
+                    subjectArray.forEach(subjectElement => {
+                        newOptionsHTML += `<option value="${subjectElement.sub_id}">${subjectElement.sub_name}</option>`;
+                    });
+                    
+                    dropdownNode.innerHTML = newOptionsHTML;
+                    
+                } catch (exception) {
+                    console.warn("Subject Metadata Exception:", exception);
+                    dropdownNode.innerHTML = '<option disabled selected>Error loading subjects</option>';
+                    UserInterfaceEngine.triggerAlert("Failed to load subjects from database.", "warning");
+                }
+            }
+
+            /**
+             * Transmits filters to DB and renders the interactive table.
+             * @returns {Promise<void>}
+             */
+            static async executeRosterRetrieval() {
+                const deptIdVal = AppMemory.getSessionContext().dept_id;
+                const yearVal = document.getElementById('config-year-select').value;
+                const subjectIdVal = document.getElementById('config-subject-select').value;
+                const dateVal = document.getElementById('config-date-input').value;
+                
+                const filterPayload = {
+                    dept_id: deptIdVal,
+                    year: yearVal,
+                    subject_id: subjectIdVal,
+                    date: dateVal
+                };
+
+                if (filterPayload.subject_id === "") {
+                    UserInterfaceEngine.triggerAlert("Please select a Subject first.", "error");
+                    return;
+                }
+
+                const renderingZone = document.getElementById('data-render-zone');
+                
+                if (renderingZone === null) return;
+                
+                UserInterfaceEngine.renderProcessingState('data-render-zone', "Fetching student list from database...");
+
+                try {
+                    const serverResponse = await NetworkTransmitter.executePost('/faculty/fetch-class', filterPayload);
+                    
+                    if (serverResponse.students === undefined || serverResponse.students.length === 0) {
+                        UserInterfaceEngine.renderVoidState('data-render-zone', 'fa-user-slash', 'No Students Found', "There are no students enrolled in this year and department.");
+                        return;
+                    }
+
+                    const studentCount = serverResponse.students.length;
+
+                    // Build Data Table Header
+                    let dynamicTableHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; padding: 32px 32px 16px 32px; border-bottom:1px solid var(--color-border-light);">
+                            <div>
+                                <h3 style="margin: 0; color: var(--color-text-heading); font-family: var(--font-display); font-size: 1.4rem;">Student List</h3>
+                                <p style="margin: 0; font-size: 0.95rem; color: var(--color-text-muted); font-weight: 500; font-family: var(--font-sans);">
+                                    Total Students: <span class="status-badge badge-theme-info" style="margin-left: 8px; min-width: auto; padding: 4px 8px;">${studentCount}</span>
+                                </p>
+                            </div>
+                            
+                            <button id="btn-execute-commit" class="btn-secondary-action btn-theme-success" onclick="FacultySubsystem.validateAndCommitRoster()">
+                                <i class="fas fa-save"></i> Save Attendance
+                            </button>
+                        </div>
+                        
+                        <div class="data-table-container" style="border: none; box-shadow: none; border-radius: 0;">
+                            <table class="enterprise-data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%;">Roll No</th>
+                                        <th style="width: 40%;">Student Name</th>
+                                        <th style="width: 22.5%; text-align:center;">Mark Present</th>
+                                        <th style="width: 22.5%; text-align:center;">Mark Absent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `;
+
+                    // Deduplication Map
+                    const uniqueRosterMap = new Map();
+                    serverResponse.students.forEach(studentObj => {
+                        uniqueRosterMap.set(studentObj.user_id, studentObj);
+                    });
+
+                    // Inject Rows Iteratively
+                    uniqueRosterMap.forEach(studentRecord => {
+                        const isCurrentlyPresent = studentRecord.current_status === 'Present';
+                        const isCurrentlyAbsent = studentRecord.current_status === 'Absent';
+                        
+                        const checkedPresentStr = isCurrentlyPresent ? 'checked="checked"' : '';
+                        const checkedAbsentStr = isCurrentlyAbsent ? 'checked="checked"' : '';
+                        
+                        dynamicTableHTML += `
+                            <tr class="interactive-student-row" 
+                                data-system-id="${studentRecord.user_id}" 
+                                data-legal-name="${studentRecord.full_name}" 
+                                data-roll-code="${studentRecord.roll}">
+                                
+                                <td>
+                                    <span class="mono-chip">${studentRecord.roll}</span>
+                                </td>
+                                
+                                <td style="font-weight: 600; font-size: 1.05rem; color: var(--color-text-heading);">
+                                    ${studentRecord.full_name}
+                                </td>
+                                
+                                <td style="text-align:center;">
+                                    <input type="radio" name="status_radio_${studentRecord.user_id}" id="present_toggle_${studentRecord.user_id}" value="Present" class="attendance-radio-input" ${checkedPresentStr}>
+                                    <label for="present_toggle_${studentRecord.user_id}" class="attendance-radio-label">
+                                        <i class="fas fa-check"></i> Present
+                                    </label>
+                                </td>
+                                
+                                <td style="text-align:center;">
+                                    <input type="radio" name="status_radio_${studentRecord.user_id}" id="absent_toggle_${studentRecord.user_id}" value="Absent" class="attendance-radio-input" ${checkedAbsentStr}>
+                                    <label for="absent_toggle_${studentRecord.user_id}" class="attendance-radio-label">
+                                        <i class="fas fa-times"></i> Absent
+                                    </label>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    renderingZone.innerHTML = dynamicTableHTML + `</tbody></table></div>`;
+
+                } catch (networkException) {
+                    UserInterfaceEngine.renderVoidState('data-render-zone', 'fa-exclamation-triangle', 'Error', "Failed to load student list. Server might be down.");
+                }
+            }
+
+            /** * Strict validation commit 
+             * @returns {Promise<void>}
+             */
+            static async validateAndCommitRoster() {
+                const domRowCollection = document.querySelectorAll('.interactive-student-row');
+                const subjectSelectNode = document.getElementById('config-subject-select');
+                const dateNode = document.getElementById('config-date-input');
+                const commitButtonNode = document.getElementById('btn-execute-commit');
+                
+                if (commitButtonNode === null) return;
+                
+                const verifiedPayloadArray = [];
+                let validationFaultDetected = false;
+
+                for (let i = 0; i < domRowCollection.length; i++) {
+                    const htmlRow = domRowCollection[i];
+                    
+                    htmlRow.classList.remove('table-row-fault');
+                    
+                    const systemId = htmlRow.getAttribute('data-system-id');
+                    const studentName = htmlRow.getAttribute('data-legal-name');
+                    const rollCode = htmlRow.getAttribute('data-roll-code');
+                    
+                    const selectorString = `input[name="status_radio_${systemId}"]:checked`;
+                    const selectedRadioButton = htmlRow.querySelector(selectorString);
+                    
+                    if (selectedRadioButton === null) {
+                        htmlRow.classList.add('table-row-fault');
+                        htmlRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        UserInterfaceEngine.triggerAlert(`Please mark Present or Absent for: ${studentName}`, 'error');
+                        validationFaultDetected = true;
+                        break; 
+                    }
+                    
+                    verifiedPayloadArray.push({
+                        id: systemId,
+                        name: studentName,
+                        roll: rollCode,
+                        status: selectedRadioButton.value
+                    });
+                }
+
+                if (validationFaultDetected === true || verifiedPayloadArray.length === 0) {
+                    return;
+                }
+                
+                const activeIndex = subjectSelectNode.selectedIndex;
+                const activeSubjectText = subjectSelectNode.options[activeIndex].text;
+
+                const masterTransportPayload = {
+                    students: verifiedPayloadArray,
+                    date: dateNode.value,
+                    subject_id: subjectSelectNode.value,
+                    subject_name: activeSubjectText,
+                    teacher_id: AppMemory.getSessionContext().id,
+                    teacher_name: AppMemory.getSessionContext().full_name
+                };
+
+                const cachedButtonString = commitButtonNode.innerHTML;
+                commitButtonNode.innerHTML = `<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Saving...`;
+                commitButtonNode.disabled = true;
+
+                try {
+                    const serverResolution = await NetworkTransmitter.executePost('/faculty/mark', masterTransportPayload);
+                    
+                    if (serverResolution.status === 'success') {
+                        UserInterfaceEngine.triggerAlert("Attendance saved successfully!", "success");
+                    } else {
+                        const errorMsg = serverResolution.message || "Failed to save to database.";
+                        throw new Error(errorMsg);
+                    }
+                    
+                } catch (networkException) {
+                    UserInterfaceEngine.triggerAlert(networkException.message, "error");
+                    
+                } finally {
+                    commitButtonNode.innerHTML = cachedButtonString;
+                    commitButtonNode.disabled = false;
+                }
+            }
+        }
+
+        /**
+         * ====================================================================
+         * MODULE 2: STUDENT SUBSYSTEM
+         * ====================================================================
+         * Purpose: Isolated analytics calculation and specific history querying.
+         */
+        class StudentSubsystem {
+            
+            /**
+             * Renders analytical charts and percentage progressions.
+             * @returns {Promise<void>}
+             */
+            static async renderAnalyticsView() {
+                ApplicationRouter.mutateHeaderStrings("Overall Percentage", "View your attendance status for all subjects.");
+                
+                const renderTarget = document.getElementById('dashboard-workspace-area');
+                
+                if (renderTarget === null) return;
+                
+                UserInterfaceEngine.renderProcessingState('dashboard-workspace-area', 'Calculating your percentages...');
+
+                try {
+                    const serverPayload = await NetworkTransmitter.executePost('/student/stats', {
+                        user_id: AppMemory.getSessionContext().id,
+                        year: AppMemory.getSessionContext().current_year
+                    });
+
+                    const subjectArrayMap = serverPayload.data || serverPayload.subjects || [];
+                    
+                    let mathAggregateTotal = 0;
+                    let mathAggregateAttended = 0;
+
+                    subjectArrayMap.forEach(subjectNode => {
+                        const safeTotal = Number(subjectNode.total_classes || 0);
+                        const safeAttended = Number(subjectNode.attended_classes || 0);
+                        mathAggregateTotal += safeTotal;
+                        mathAggregateAttended += safeAttended;
+                    });
+
+                    let globalPercentageIndex = 0;
+                    if (mathAggregateTotal !== 0) {
+                        globalPercentageIndex = Math.round((mathAggregateAttended / mathAggregateTotal) * 100);
+                    }
+                    
+                    const isGloballyCompliant = globalPercentageIndex >= 75;
+                    const globalColorVar = isGloballyCompliant ? 'var(--color-success-main)' : 'var(--color-danger-main)';
+
+                    let domTemplateString = `
+                        <div class="workspace-card" style="background-color: var(--color-brand-900); padding: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                            <div>
+                                <h2 style="color: var(--color-text-white); margin-bottom: 8px; font-family: var(--font-display);">Total Attendance</h2>
+                                <p style="color: var(--color-text-disabled); margin: 0; font-size: 1.05rem; font-family: var(--font-sans);">Your combined percentage across all subjects.</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-family: var(--font-display); font-size: 4.5rem; font-weight: 800; line-height: 1; margin-bottom: 10px; color: ${globalColorVar};">
+                                    ${globalPercentageIndex}%
+                                </div>
+                                <div class="status-badge badge-theme-info" style="background-color: rgba(255,255,255,0.1); border: none; color: white; padding: 8px 16px;">
+                                    ${mathAggregateAttended} OF ${mathAggregateTotal} CLASSES
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 24px;">
+                            <h3 style="margin: 0; color: var(--color-text-heading); font-size: 1.5rem; font-family: var(--font-display);">Subject Breakdown</h3>
+                        </div>
+                        
+                        <div class="metric-cards-grid">
+                    `;
+
+                    if (subjectArrayMap.length === 0) {
+                        domTemplateString += `</div>`;
+                        UserInterfaceEngine.renderVoidState('dashboard-workspace-area', 'fa-book', 'No Subjects Found', 'Your schedule is currently empty.');
+                        return;
+                    }
+
+                    subjectArrayMap.forEach(subjectNode => {
+                        const localTotal = Number(subjectNode.total_classes || 0);
+                        const localAttended = Number(subjectNode.attended_classes || 0);
+                        
+                        let localPercent = 0;
+                        if (localTotal !== 0) {
+                            localPercent = Math.round((localAttended / localTotal) * 100);
+                        }
+                        
+                        let statusQualifier = 'theme-danger';
+                        let badgeQualifier = 'badge-theme-danger';
+                        let hexColor = 'var(--color-danger-main)';
+                        
+                        if (localPercent >= 75) { 
+                            statusQualifier = 'theme-success'; 
+                            badgeQualifier = 'badge-theme-success'; 
+                            hexColor = 'var(--color-success-main)'; 
+                        } else if (localPercent >= 60) { 
+                            statusQualifier = 'theme-warning'; 
+                            badgeQualifier = 'badge-theme-warning'; 
+                            hexColor = 'var(--color-warning-main)'; 
+                        }
+
+                        const subjectTitle = subjectNode.subject || 'Unknown Subject';
+
+                        domTemplateString += `
+                            <div class="metric-card-item ${statusQualifier}">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--color-text-heading); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; font-family: var(--font-sans);" title="${subjectTitle}">
+                                        ${subjectTitle}
+                                    </div>
+                                    <div class="status-badge ${badgeQualifier}" style="font-size: 0.85rem;">${localPercent}%</div>
+                                </div>
+                                
+                                <div class="metric-progress-bg">
+                                    <div class="metric-progress-fill" style="width: ${localPercent}%; background-color: ${hexColor};"></div>
+                                </div>
+                                
+                                <div style="margin-top: 20px; font-size: 0.9rem; font-weight: 600; color: var(--color-text-muted); display: flex; align-items: center; gap: 8px; font-family: var(--font-sans);">
+                                    <i class="fas fa-check-circle" style="color: ${hexColor}"></i>
+                                    <span>${localAttended} Present / ${localTotal} Total</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    renderTarget.innerHTML = domTemplateString + `</div>`;
+
+                } catch (exception) {
+                    UserInterfaceEngine.renderVoidState('dashboard-workspace-area', 'fa-exclamation-triangle', 'Error', 'Failed to load your attendance data.');
+                }
+            }
+
+            /**
+             * Renders UI skeleton for searching exact dates in the historical DB.
+             * @returns {void}
+             */
+            static renderHistoryView() {
+                ApplicationRouter.mutateHeaderStrings("Attendance History", "Check your status for a specific day.");
+                
+                const workspaceNode = document.getElementById('dashboard-workspace-area');
+                
+                if (workspaceNode === null) return;
+                
+                const currentDateStr = AppMemory.getSystemDate();
+
+                workspaceNode.innerHTML = `
+                    <div class="workspace-card" style="max-width: 650px;">
+                        <h3 style="margin-bottom: 12px; color: var(--color-text-heading); font-family: var(--font-display);">
+                            <i class="fas fa-calendar-alt" style="color: var(--color-accent-main); margin-right: 12px;"></i>Select Date
+                        </h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 24px; font-size: 1rem; font-family: var(--font-sans);">Choose a date from the calendar to see which classes you attended.</p>
+                        
+                        <div class="action-filter-toolbar" style="margin-bottom: 0;">
+                            <div class="filter-input-wrapper">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; color: var(--color-text-body); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-sans);">Date</label>
+                                <input type="date" id="student-query-date" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; color: var(--color-text-heading); font-family: var(--font-mono); transition: all var(--transition-fast);" value="${currentDateStr}">
+                            </div>
+                            <button class="btn-secondary-action" onclick="StudentSubsystem.executeHistoryQuery()" style="height: 52px;">
+                                <i class="fas fa-search"></i> View Records
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="student-history-results-zone" style="position: relative; min-height: 300px; display: flex; flex-direction: column;">
+                        <div class="system-empty-state" style="background-color: transparent; border: none; flex-grow: 1;">
+                            <i class="fas fa-search system-empty-icon"></i>
+                            <h3 style="color: var(--color-text-heading); margin-bottom: 8px; font-family: var(--font-display); font-size: 1.25rem;">Waiting for Search</h3>
+                            <p>Select a date above to view your history.</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            /**
+             * Executes the API call and constructs the data table for historical events 
+             * @returns {Promise<void>}
+             */
+            static async executeHistoryQuery() {
+                const dateInputNode = document.getElementById('student-query-date');
+                const resultZoneNode = document.getElementById('student-history-results-zone');
+                
+                if (dateInputNode === null || resultZoneNode === null) return;
+                
+                const requestedDate = dateInputNode.value;
+                
+                UserInterfaceEngine.renderProcessingState('student-history-results-zone', 'Searching database...');
+
+                try {
+                    const payloadObj = {
+                        user_id: AppMemory.getSessionContext().id, 
+                        date: requestedDate
+                    };
+                    
+                    const responseData = await NetworkTransmitter.executePost('/student/history', payloadObj);
+
+                    if (responseData.history === undefined || responseData.history.length === 0) {
+                        UserInterfaceEngine.renderVoidState('student-history-results-zone', 'fa-calendar-times', 'No Classes Found', `There are no attendance records for ${requestedDate}.`);
+                        return;
+                    }
+
+                    let tableBuilderHTML = `
+                        <div class="data-table-container">
+                            <div style="padding: 20px 24px; background-color: var(--color-bg-app); border-bottom: 1px solid var(--color-border-light); display: flex; justify-content: space-between; align-items: center;">
+                                <h4 style="margin: 0; color: var(--color-text-heading); font-family: var(--font-display); font-size: 1.1rem;">Records for ${requestedDate}</h4>
+                                <span class="status-badge badge-theme-info">
+                                    ${responseData.history.length} Classes
+                                </span>
+                            </div>
+                            
+                            <table class="enterprise-data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 75%;">Subject</th>
+                                        <th style="width: 25%; text-align: right;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `;
+
+                    responseData.history.forEach(logEntry => {
+                        const booleanPresence = logEntry.status === 'Present';
+                        const badgeTheme = booleanPresence ? 'badge-theme-success' : 'badge-theme-danger';
+                        const iconClass = booleanPresence ? 'fa-check' : 'fa-times';
+                        
+                        tableBuilderHTML += `
+                            <tr>
+                                <td style="font-weight: 600; font-size: 1.05rem; color: var(--color-text-heading);">
+                                    ${logEntry.subject}
+                                </td>
+                                <td style="text-align:right;">
+                                    <span class="status-badge ${badgeTheme}">
+                                        <i class="fas ${iconClass}" style="margin-right: 6px;"></i> ${logEntry.status}
+                                    </span>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    resultZoneNode.innerHTML = tableBuilderHTML + `</tbody></table></div>`;
+
+                } catch (networkException) {
+                    UserInterfaceEngine.renderVoidState('student-history-results-zone', 'fa-exclamation-circle', 'Error', 'Failed to retrieve history. Server error.');
+                }
+            }
+        }
+
+        /**
+         * ====================================================================
+         * MODULE 3: ADMINISTRATIVE SUBSYSTEM (HOD & PRINCIPAL)
+         * ====================================================================
+         */
+        class AdministrativeSubsystem {
+            
+            /**
+             * Abstracted private method for fetching aggregated analytics.
+             * @param {Object} roleSpecificPayload 
+             * @returns {Promise<Object>}
+             */
+            static async _fetchSystemAggregates(roleSpecificPayload) {
+                try {
+                    const resultData = await NetworkTransmitter.executePost('/analytics/dashboard', roleSpecificPayload);
+                    return resultData;
+                } catch (exception) {
+                    throw exception; 
+                }
+            }
+
+            /**
+             * [HOD VIEW] Renders specific department aggregates broken down by Academic Year.
+             * @returns {Promise<void>}
+             */
+            static async renderDepartmentAnalytics() {
+                const targetDeptIdInt = AppMemory.getSessionContext().dept_id;
+                const deptNameStr = AppMemory.resolveDepartmentName();
+                
+                ApplicationRouter.mutateHeaderStrings("Department Stats", `Overview for ${deptNameStr}`);
+                
+                const renderingZoneNode = document.getElementById('dashboard-workspace-area');
+                
+                if (renderingZoneNode === null) return;
+                
+                UserInterfaceEngine.renderProcessingState('dashboard-workspace-area', "Calculating Department Stats...");
+
+                try {
+                    const serverPayloadData = await this._fetchSystemAggregates({ 
+                        role: 'hod', 
+                        dept_id: targetDeptIdInt 
+                    });
+                    
+                    let htmlBuilderString = `
+                        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end;">
+                            <div>
+                                <h3 style="color: var(--color-text-heading); font-size: 1.5rem; margin-bottom: 4px; font-family: var(--font-display);">Yearly Averages</h3>
+                                <p style="color: var(--color-text-muted); margin: 0; font-family: var(--font-sans);">Average attendance percentage for each year group.</p>
+                            </div>
+                        </div>
+                        <div class="metric-cards-grid">
+                    `;
+                    
+                    serverPayloadData.stats.forEach(dataNodeObject => {
+                        const numericPercentageValue = dataNodeObject.percentage;
+                        
+                        let statusConfigClass = 'theme-danger';
+                        let hexColorValue = 'var(--color-danger-main)';
+                        
+                        if (numericPercentageValue >= 75) {
+                            statusConfigClass = 'theme-success';
+                            hexColorValue = 'var(--color-success-main)';
+                        } else if (numericPercentageValue >= 60) {
+                            statusConfigClass = 'theme-warning';
+                            hexColorValue = 'var(--color-warning-main)';
+                        }
+                        
+                        htmlBuilderString += `
+                            <div class="metric-card-item ${statusConfigClass}">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                    <div class="metric-item-title" style="margin: 0;">
+                                        ${dataNodeObject.label}
+                                    </div>
+                                </div>
+                                
+                                <div class="metric-item-value" style="color: ${hexColorValue}; margin-bottom: 15px;">
+                                    ${numericPercentageValue}%
+                                </div>
+                                
+                                <div class="metric-progress-bg">
+                                    <div class="metric-progress-fill" style="width: ${numericPercentageValue}%; background-color: ${hexColorValue};"></div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    renderingZoneNode.innerHTML = htmlBuilderString + `</div>`;
+
+                } catch (networkError) { 
+                    UserInterfaceEngine.renderVoidState('dashboard-workspace-area', 'fa-exclamation-triangle', 'Error', "Failed to load department stats."); 
+                }
+            }
+
+            /**
+             * [PRINCIPAL VIEW] Renders global, cross-departmental macro aggregates.
+             * @returns {Promise<void>}
+             */
+            static async renderGlobalAnalytics() {
+                ApplicationRouter.mutateHeaderStrings("College Overview", "Average attendance for all departments.");
+                
+                const renderingZoneNode = document.getElementById('dashboard-workspace-area');
+                
+                if (renderingZoneNode === null) return;
+                
+                UserInterfaceEngine.renderProcessingState('dashboard-workspace-area', "Gathering College Data...");
+
+                try {
+                    const serverPayloadData = await this._fetchSystemAggregates({ 
+                        role: 'principal' 
+                    });
+                    
+                    let htmlBuilderString = `
+                        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end;">
+                            <div>
+                                <h3 style="color: var(--color-text-heading); font-size: 1.5rem; margin-bottom: 4px; font-family: var(--font-display);">Department Averages</h3>
+                                <p style="color: var(--color-text-muted); margin: 0; font-family: var(--font-sans);">Compare attendance rates across different branches.</p>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                    `;
+                    
+                    serverPayloadData.stats.forEach(dataNodeObject => {
+                        const numericPercentageValue = dataNodeObject.percentage;
+                        
+                        let hexColorValue = 'var(--color-danger-main)';
+                        
+                        if (numericPercentageValue >= 75) {
+                            hexColorValue = 'var(--color-success-main)';
+                        } else if (numericPercentageValue >= 50) {
+                            hexColorValue = 'var(--color-warning-main)';
+                        }
+                        
+                        htmlBuilderString += `
+                            <div class="workspace-card" style="padding: 32px; margin-bottom: 0; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 25px rgba(15, 23, 42, 0.1)';" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--shadow-card)';">
+                                <div style="font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-sans); position: relative; z-index: 10;" title="${dataNodeObject.label}">
+                                    ${dataNodeObject.label}
+                                </div>
+                                <div style="font-family: var(--font-display); font-size: 4rem; font-weight: 800; line-height: 1; color: ${hexColorValue}; margin-bottom: 20px; position: relative; z-index: 10;">
+                                    ${numericPercentageValue}%
+                                </div>
+                                <div class="metric-progress-bg" style="position: relative; z-index: 10;">
+                                    <div class="metric-progress-fill" style="width: ${numericPercentageValue}%; background-color: ${hexColorValue};"></div>
+                                </div>
+                                
+                                <div style="position: absolute; right: -30px; top: -30px; width: 120px; height: 120px; border-radius: 50%; background-color: ${hexColorValue}; opacity: 0.08;"></div>
+                            </div>
+                        `;
+                    });
+                    
+                    renderingZoneNode.innerHTML = htmlBuilderString + `</div>`;
+
+                } catch (networkError) { 
+                    UserInterfaceEngine.renderVoidState('dashboard-workspace-area', 'fa-globe-americas', 'Error', "Failed to load college overview."); 
+                }
+            }
+
+            /**
+             * Shared Drill-Down UI setup.
+             * @param {string} authorizationRoleString - 'hod' or 'principal'
+             * @returns {void}
+             */
+            static renderDeepSearchInterface(authorizationRoleString) {
+                const isGlobalAdministrator = authorizationRoleString === 'principal';
+                
+                const headerTitleStr = isGlobalAdministrator ? "Global Search" : "Student Search";
+                ApplicationRouter.mutateHeaderStrings(headerTitleStr, "Find and view specific student records.");
+                
+                let globalDepartmentFilterHTML = '';
+                
+                if (isGlobalAdministrator === true) {
+                    globalDepartmentFilterHTML = `
+                        <div class="filter-input-wrapper">
+                            <label style="display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-sans);">Select Department</label>
+                            <select id="admin-search-dept-id" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; color: var(--color-text-heading); font-family: var(--font-sans); transition: all 0.2s;">
+                                <option value="1">Computer Science</option>
+                                <option value="2">Electronics & Comm</option>
+                                <option value="3">Mechanical Engg</option>
+                                <option value="4">Information Tech</option>
+                                <option value="5">Electrical (EEE)</option>
+                            </select>
+                        </div>
+                    `;
+                }
+
+                const workspaceNode = document.getElementById('dashboard-workspace-area');
+                
+                if (workspaceNode !== null) {
+                    workspaceNode.innerHTML = `
+                        <div class="workspace-card">
+                            <div style="border-bottom: 1px solid var(--color-border-light); padding-bottom: 20px; margin-bottom: 24px;">
+                                <h3 style="color: var(--color-text-heading); font-size: 1.3rem; margin-bottom: 4px; font-family: var(--font-display);">
+                                    <i class="fas fa-search" style="color: var(--color-accent-main); margin-right: 12px;"></i>Search Filters
+                                </h3>
+                                <p style="color: var(--color-text-muted); margin: 0; font-size: 0.95rem; font-family: var(--font-sans);">Select the year and department to view the student list.</p>
+                            </div>
+                            
+                            <div class="action-filter-toolbar">
+                                ${globalDepartmentFilterHTML}
+                                <div class="filter-input-wrapper">
+                                    <label style="display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-sans);">Select Year</label>
+                                    <select id="admin-search-year-id" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; color: var(--color-text-heading); font-family: var(--font-sans); transition: all 0.2s;">
+                                        <option value="1">1st Year</option>
+                                        <option value="2">2nd Year</option>
+                                        <option value="3">3rd Year</option>
+                                        <option value="4">4th Year</option>
+                                    </select>
+                                </div>
+                                <button class="btn-secondary-action" style="height: 52px; font-size: 0.95rem; padding: 0 28px;" onclick="AdministrativeSubsystem.executeDataLakeSearch('${authorizationRoleString}')">
+                                    <i class="fas fa-search"></i> Search Records
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="workspace-card" id="admin-search-output-zone" style="min-height: 400px; padding: 0; display: flex; flex-direction: column;">
+                            <div class="system-empty-state" style="background-color: transparent; border: none; flex-grow: 1;">
+                                <i class="fas fa-table system-empty-icon"></i>
+                                <h3 style="color: var(--color-text-heading); margin-bottom: 8px; font-family: var(--font-display); font-size: 1.25rem;">Ready to Search</h3>
+                                <p>Select your filters above and click search.</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            /** * Core function to hit the drill-down API endpoint and build the datatable.
+             * @param {string} authorizationRoleString 
+             * @returns {Promise<void>}
+             */
+            static async executeDataLakeSearch(authorizationRoleString) {
+                const targetYearNode = document.getElementById('admin-search-year-id');
+                
+                if (targetYearNode === null) return;
+                
+                const targetYearValue = targetYearNode.value;
+                
+                let targetDepartmentValue = null;
+                if (authorizationRoleString === 'principal') {
+                    const deptNode = document.getElementById('admin-search-dept-id');
+                    if (deptNode !== null) targetDepartmentValue = deptNode.value;
+                } else {
+                    targetDepartmentValue = AppMemory.getSessionContext().dept_id;
+                }
+                
+                const renderingOutputNode = document.getElementById('admin-search-output-zone');
+                
+                if (renderingOutputNode === null) return;
+                
+                UserInterfaceEngine.renderProcessingState('admin-search-output-zone', "Fetching records...");
+
+                try {
+                    const requestPayloadObj = { 
+                        dept_id: targetDepartmentValue, 
+                        year: targetYearValue 
+                    };
+                    
+                    const serverPayloadData = await NetworkTransmitter.executePost('/analytics/students', requestPayloadObj);
+                    
+                    if (serverPayloadData.students === undefined || serverPayloadData.students.length === 0) {
+                        UserInterfaceEngine.renderVoidState(
+                            'admin-search-output-zone', 
+                            'fa-user-slash', 
+                            'No Students Found', 
+                            "There are no students in this specific class."
+                        );
+                        return;
+                    }
+
+                    let tableHTMLBuilderString = `
+                        <div class="data-table-container" style="border: none; box-shadow: none; border-radius: 0;">
+                            <div style="padding: 24px 32px; background-color: var(--color-bg-app); border-bottom: 1px solid var(--color-border-light); display: flex; justify-content: space-between; align-items: center;">
+                                <h4 style="margin: 0; color: var(--color-text-heading); font-family: var(--font-display); font-size: 1.1rem;">Student List</h4>
+                                <span class="status-badge badge-theme-info">
+                                    ${serverPayloadData.students.length} Students
+                                </span>
+                            </div>
+                            
+                            <table class="enterprise-data-table">
+                                <thead style="background-color: var(--color-bg-card);">
+                                    <tr>
+                                        <th style="width: 15%;">Roll No</th>
+                                        <th style="width: 40%;">Student Name</th>
+                                        <th style="width: 15%; text-align: right;">Total Classes</th>
+                                        <th style="width: 15%; text-align: right;">Attended</th>
+                                        <th style="width: 15%; text-align: center;">Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `;
+
+                    serverPayloadData.students.forEach(studentDataObject => {
+                        
+                        const isStudentCompliant = studentDataObject.percent >= 75;
+                        const dynamicBadgeThemeClass = isStudentCompliant ? 'badge-theme-success' : 'badge-theme-danger';
+                        
+                        tableHTMLBuilderString += `
+                            <tr>
+                                <td>
+                                    <span class="mono-chip">
+                                        ${studentDataObject.roll}
+                                    </span>
+                                </td>
+                                
+                                <td style="font-weight: 600; font-size: 1.05rem; color: var(--color-text-heading);">
+                                    ${studentDataObject.name}
+                                </td>
+                                
+                                <td style="text-align: right; color: var(--color-text-muted); font-weight: 600; font-size: 1.05rem;">
+                                    ${studentDataObject.total}
+                                </td>
+                                
+                                <td style="text-align: right; color: var(--color-text-heading); font-weight: 700; font-size: 1.05rem;">
+                                    ${studentDataObject.attended}
+                                </td>
+                                
+                                <td style="text-align: center;">
+                                    <span class="status-badge ${dynamicBadgeThemeClass}">
+                                        ${studentDataObject.percent}%
+                                    </span>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    renderingOutputNode.innerHTML = tableHTMLBuilderString + `</tbody></table></div>`;
+
+                } catch (networkFatalError) {
+                    UserInterfaceEngine.renderVoidState('admin-search-output-zone', 'fa-exclamation-triangle', 'Error', "Failed to load student data.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
