@@ -11,21 +11,19 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="EduTrack Pro">
     
-    <title>EduTrack Pro | Secure Access</title>
+    <title>Lumina | Secure Access</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Luckiest+Guy&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
 
     <style>
         /* ----------------------------------------------------------------------------------
            1.0 DESIGN TOKENS (CSS VARIABLES)
            ---------------------------------------------------------------------------------- */
         :root {
-            /* * Brand Colors 
-             * Matches the exact deep blue and crisp whites from the reference design.
-             */
+            /* Brand Colors */
             --color-bg-app:          #f8fafc;
             --color-bg-card:         #ffffff;
             
@@ -41,9 +39,7 @@
             --color-accent-light:    #eff6ff;
             --color-accent-glow:     rgba(37, 99, 235, 0.25);
             
-            /* * Semantic Status Colors 
-             * Used for badges, charts, and notification toasts.
-             */
+            /* Semantic Status Colors */
             --color-success-main:    #10b981;
             --color-success-dark:    #059669;
             --color-success-bg:      #ecfdf5;
@@ -64,51 +60,44 @@
             --color-info-bg:         #f0f9ff;
             --color-info-border:     #bae6fd;
             
-            /* * Role-Specific Icon Colors 
-             */
+            /* Role-Specific Icon Colors */
             --color-role-student:    #3b82f6;
             --color-role-faculty:    #f59e0b;
             --color-role-hod:        #10b981;
             --color-role-principal:  #ef4444;
             
-            /* * UI Surfaces & Borders 
-             */
+            /* UI Surfaces & Borders */
             --color-surface-hover:   #f1f5f9;
             --color-surface-input:   #f1f5f9;
             --color-border-light:    #e2e8f0;
             --color-border-dark:     #cbd5e1;
             --color-overlay-bg:      rgba(15, 23, 42, 0.75);
             
-            /* * Typography Ink 
-             */
+            /* Typography Ink */
             --color-text-heading:    #0f172a;
             --color-text-body:       #334155;
             --color-text-muted:      #64748b;
             --color-text-disabled:   #94a3b8;
             --color-text-white:      #ffffff;
             
-            /* * Font Families 
-             */
+            /* Font Families */
             --font-sans:             'Inter', system-ui, sans-serif;
             --font-display:          'Outfit', sans-serif;
             --font-mono:             'JetBrains Mono', monospace;
             
-            /* * Layout Geometry 
-             */
+            /* Layout Geometry */
             --layout-sidebar-width:  280px;
             --layout-header-height:  80px;
             --layout-padding:        40px;
             
-            /* * Border Radii 
-             */
+            /* Border Radii */
             --radius-sm:             6px;
             --radius-md:             12px;
             --radius-lg:             16px;
             --radius-xl:             24px;
             --radius-circle:         9999px;
             
-            /* * Elevation & Box Shadows 
-             */
+            /* Elevation & Box Shadows */
             --shadow-sm:             0 1px 2px 0 rgba(15, 23, 42, 0.05);
             --shadow-md:             0 4px 6px -1px rgba(15, 23, 42, 0.08);
             --shadow-lg:             0 10px 15px -3px rgba(15, 23, 42, 0.08);
@@ -116,15 +105,14 @@
             --shadow-card:           0 8px 30px rgba(15, 23, 42, 0.04);
             --shadow-float:          0 20px 40px -10px rgba(0, 0, 0, 0.15);
             
-            /* * Animation Timings 
-             */
+            /* Animation Timings */
             --transition-fast:       150ms ease;
             --transition-normal:     250ms ease;
             --transition-slow:       400ms ease;
         }
 
         /* ----------------------------------------------------------------------------------
-           2.0 GLOBAL RESET & NORMALIZE (Fully Expanded)
+           2.0 GLOBAL RESET & NORMALIZE
            ---------------------------------------------------------------------------------- */
         * {
             margin-top: 0;
@@ -176,14 +164,13 @@
             height: 100vh;
             width: 100vw;
             overflow-x: hidden;
-            overflow-y: hidden; /* Prevents global scrolling, ensures app feel */
+            overflow-y: hidden;
             display: flex;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* * Typography Base Styles 
-         */
+        /* * Typography Base Styles */
         h1 {
             font-family: var(--font-display);
             color: var(--color-text-heading);
@@ -252,8 +239,7 @@
             line-height: 1.6;
         }
 
-        /* * Base Interactive Elements 
-         */
+        /* * Base Interactive Elements */
         button {
             border-top-width: 0;
             border-right-width: 0;
@@ -319,12 +305,9 @@
         }
 
         /* ----------------------------------------------------------------------------------
-           3.0 SPLIT-SCREEN LOGIN INTERFACE (EXACT MATCH REFERENCE UI)
+           3.0 SPLIT-SCREEN LOGIN INTERFACE
            ---------------------------------------------------------------------------------- */
         
-        /* * Main Container
-         * Ensures the login screen covers the entire viewport without scrolling.
-         */
         #login-viewport {
             position: fixed;
             top: 0;
@@ -344,8 +327,6 @@
             transition-timing-function: ease;
         }
 
-        /* * Left Panel: Animated Gradient Art 
-         */
         .login-visual-panel {
             flex-grow: 1;
             flex-shrink: 1;
@@ -365,14 +346,12 @@
             padding-left: 40px;
         }
 
-        /* Hide visual panel on mobile to prioritize the form */
         @media (max-width: 900px) {
             .login-visual-panel {
                 display: none;
             }
         }
 
-        /* Floating Ambient Light Orbs */
         .ambient-orb {
             position: absolute;
             border-top-left-radius: 50%;
@@ -400,7 +379,6 @@
             opacity: 0.2;
         }
 
-        /* Content inside the Left Panel */
         .visual-panel-content {
             z-index: 10;
             text-align: center;
@@ -430,7 +408,6 @@
             max-width: 400px;
         }
 
-        /* Feature Pills (Enterprise Security, Real-time Sync) */
         .feature-pill-container {
             display: flex;
             flex-direction: row;
@@ -464,7 +441,6 @@
             -webkit-backdrop-filter: blur(10px);
         }
 
-        /* Build version text at bottom left */
         .visual-panel-footer {
             position: absolute;
             bottom: 30px;
@@ -477,8 +453,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* * Right Panel: Clean White Form 
-         */
         .login-form-panel {
             flex-grow: 1;
             flex-shrink: 1;
@@ -493,7 +467,7 @@
             padding-left: 40px;
             background-color: var(--color-bg-card);
             height: 100vh;
-            overflow-y: auto; /* Scrollable if screen is extremely tiny */
+            overflow-y: auto;
         }
 
         .login-form-card {
@@ -526,8 +500,6 @@
             font-family: var(--font-sans);
         }
 
-        /* * Role Selection Grid (Matches Screenshot) 
-         */
         .role-selection-group {
             margin-bottom: 25px;
         }
@@ -593,7 +565,6 @@
             transition-timing-function: ease;
         }
 
-        /* Specific icon colors when not active */
         .role-option-card[data-role="student"]:not(.is-active) i { 
             color: var(--color-role-student); 
         }
@@ -607,7 +578,6 @@
             color: var(--color-role-principal); 
         }
         
-        /* All icons white when active */
         .role-option-card.is-active i { 
             color: var(--color-text-white); 
         }
@@ -618,8 +588,6 @@
             font-family: var(--font-sans);
         }
 
-        /* * Form Input Fields 
-         */
         .input-group {
             margin-bottom: 24px;
         }
@@ -661,8 +629,6 @@
             box-shadow: 0px 0px 0px 4px var(--color-accent-glow);
         }
 
-        /* * Primary Submit Button 
-         */
         .btn-submit-primary {
             width: 100%;
             padding-top: 18px;
@@ -711,7 +677,6 @@
            4.0 MAIN DASHBOARD SHELL
            ---------------------------------------------------------------------------------- */
         
-        /* Dashboard Container - Strictly hidden until login success */
         #dashboard-viewport {
             display: none;
             width: 100%;
@@ -723,8 +688,6 @@
             flex-direction: row;
         }
 
-        /* * Sidebar Navigation 
-         */
         .dashboard-sidebar {
             width: var(--layout-sidebar-width);
             background-color: var(--color-brand-900);
@@ -832,8 +795,6 @@
             gap: 8px;
         }
 
-        /* * Main Content Workspace 
-         */
         .dashboard-main-content {
             flex-grow: 1;
             flex-shrink: 1;
@@ -846,7 +807,6 @@
             overflow-y: hidden;
         }
 
-        /* Top Header Bar */
         .dashboard-top-header {
             height: var(--layout-header-height);
             background-color: rgba(255, 255, 255, 0.95);
@@ -893,10 +853,9 @@
             gap: 30px;
         }
 
-        /* System Clock */
         .header-clock {
             text-align: right;
-            display: none; /* Hidden on mobile */
+            display: none; 
         }
         @media (min-width: 768px) {
             .header-clock { display: block; }
@@ -922,7 +881,6 @@
             gap: 6px;
         }
 
-        /* User Profile Dropdown Widget */
         .header-user-widget {
             display: flex;
             flex-direction: row;
@@ -996,7 +954,6 @@
             text-transform: uppercase;
         }
 
-        /* Scrollable Workspace Area */
         .dashboard-workspace {
             flex-grow: 1;
             flex-shrink: 1;
@@ -1015,7 +972,6 @@
            5.0 REUSABLE DASHBOARD COMPONENTS
            ---------------------------------------------------------------------------------- */
         
-        /* Content Card */
         .workspace-card {
             background-color: var(--color-bg-card);
             border-top-left-radius: var(--radius-lg);
@@ -1036,7 +992,6 @@
             box-shadow: var(--shadow-card);
         }
 
-        /* KPI / Metric Grid */
         .metric-cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1092,7 +1047,6 @@
             line-height: 1;
         }
 
-        /* Progress Bars */
         .metric-progress-bg {
             width: 100%;
             height: 6px;
@@ -1117,7 +1071,6 @@
             transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* Advanced Filter Toolbar */
         .action-filter-toolbar {
             display: flex;
             flex-direction: row;
@@ -1150,7 +1103,6 @@
             min-width: 200px;
         }
 
-        /* Secondary Action Buttons */
         .btn-secondary-action {
             padding-top: 16px;
             padding-right: 32px;
@@ -1185,7 +1137,6 @@
         .btn-theme-success { background-color: var(--color-success-main); }
         .btn-theme-success:hover { background-color: var(--color-success-dark); }
 
-        /* Data Tables */
         .data-table-container {
             width: 100%;
             overflow-x: auto;
@@ -1248,7 +1199,6 @@
             border-bottom-style: none;
         }
 
-        /* Badges & Chips */
         .status-badge {
             display: inline-flex;
             flex-direction: row;
@@ -1296,7 +1246,6 @@
             color: var(--color-brand-800);
         }
 
-        /* Interactive Attendance Radio Buttons */
         .attendance-radio-input {
             display: none;
         }
@@ -1520,7 +1469,7 @@
             padding-right: 48px;
             padding-bottom: 48px;
             padding-left: 48px;
-            box-shadow: var(--shadow-2xl);
+            box-shadow: var(--shadow-xl);
             transform: scale(0.95) translateY(20px);
             transition-property: all;
             transition-duration: 0.3s;
@@ -1532,7 +1481,7 @@
         }
         
     </style>
-    </head>
+</head>
 <body>
 
     <div id="login-viewport">
@@ -1549,13 +1498,13 @@
                     <i class="fas fa-university"></i>
                 </div>
                 
- <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-</style>
-<h2 class="visual-panel-title" style="line-height: 1.2; color: #ffffff; font-family: 'Pacifico', cursive; font-size: 5rem; font-weight: 400; margin-bottom: 15px; letter-spacing: 2px;">
-    EduTrack<br>
-    <span style="font-size: 1.2rem; font-weight: 500; opacity: 0.85; color: #ffffff; font-family: var(--font-sans); display: block; margin-top: 5px; letter-spacing: normal;">Smart Attendance & Analytics</span>
-</h2>
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+                </style>
+                <h2 class="visual-panel-title" style="line-height: 1.2; color: #ffffff; font-family: 'Pacifico', cursive; font-size: 5rem; font-weight: 400; margin-bottom: 15px; letter-spacing: 2px;">
+                    Lumina<br>
+                    <span style="font-size: 1.2rem; font-weight: 500; opacity: 0.85; color: #ffffff; font-family: var(--font-sans); display: block; margin-top: 5px; letter-spacing: normal;">Smart Attendance & Analytics</span>
+                </h2>
                 
                 <div class="feature-pill-container">
                     
@@ -1574,7 +1523,7 @@
             </div>
             
             <div class="visual-panel-footer">
-               
+                
             </div>
             
         </div>
@@ -1691,7 +1640,7 @@
                     <i class="fas fa-layer-group"></i>
                 </div>
                 <div class="sidebar-brand-text">
-                    EduTrack
+                    Lumina
                 </div>
             </div>
             
@@ -1753,7 +1702,7 @@
                 
                 <div class="system-loading-view">
                     <div class="system-spinner"></div>
-                    <h3 style="color: var(--color-primary-900); font-family: var(--font-display); font-weight: 700; margin-bottom: 8px;">
+                    <h3 style="color: var(--color-text-heading); font-family: var(--font-display); font-weight: 700; margin-bottom: 8px;">
                         Please Wait
                     </h3>
                     <p style="font-size: 1rem;">
@@ -1827,7 +1776,7 @@
         </div>
         
     </div>
-
+    
     <script>
         /**
          * @fileoverview Enterprise Client Application Logic
@@ -1962,16 +1911,18 @@
                         body: JSON.stringify(payload)
                     });
 
+                    const jsonResult = await response.json();
+                    
                     if (response.ok === false) {
+                        if (jsonResult.message) throw new Error(jsonResult.message);
                         throw new Error(`Server Error: ${response.status}`);
                     }
 
-                    const jsonResult = await response.json();
                     return jsonResult;
 
                 } catch (exception) {
                     console.error(`[NETWORK FATAL] ${relativePath}:`, exception);
-                    throw new Error("Unable to connect to database. Please check your connection.");
+                    throw new Error(exception.message || "Unable to connect to database.");
                 }
             }
 
@@ -1991,16 +1942,18 @@
                     
                     const response = await fetch(fullUrl);
 
+                    const jsonResult = await response.json();
+                    
                     if (response.ok === false) {
+                        if (jsonResult.message) throw new Error(jsonResult.message);
                         throw new Error(`Server Error: ${response.status}`);
                     }
 
-                    const jsonResult = await response.json();
                     return jsonResult;
 
                 } catch (exception) {
                     console.error(`[NETWORK FATAL] ${relativePath}:`, exception);
-                    throw new Error("Failed to retrieve data from server.");
+                    throw new Error(exception.message || "Failed to retrieve data from server.");
                 }
             }
         }
@@ -2146,8 +2099,7 @@
                 setInterval(tickChronometer, 60000); 
             }
         }
-
-        /**
+/**
          * ====================================================================
          * SECTION 5: AUTHENTICATION CONTROLLER
          * ====================================================================
@@ -2334,18 +2286,19 @@
                 if (modalRoleBadge) modalRoleBadge.innerText = `${normalizedRole} ACCESS`;
                 if (modalSystemId) modalSystemId.innerText = sessionContext.username;
                 
-               let deptDisplay = 'Administration';
+                let deptDisplay = 'Administration';
 
-// Force Global Admin status if the user is the Principal
-if (sessionContext.role === 'principal') {
-    deptDisplay = 'Global Administration (All Departments)';
-} 
-// Otherwise, load their specific department
-else if (sessionContext.dept_id !== null && sessionContext.dept_id !== undefined) {
-    deptDisplay = `Dept ${sessionContext.dept_id} (${AppMemory.resolveDepartmentName()})`;
-}
+                // Force Global Admin status if the user is the Principal
+                if (sessionContext.role === 'principal') {
+                    deptDisplay = 'Global Administration (All Departments)';
+                } 
+                // Otherwise, load their specific department
+                else if (sessionContext.dept_id !== null && sessionContext.dept_id !== undefined) {
+                    deptDisplay = `Dept ${sessionContext.dept_id} (${AppMemory.resolveDepartmentName()})`;
+                }
 
-if (modalDept) modalDept.innerText = deptDisplay;
+                if (modalDept) modalDept.innerText = deptDisplay;
+                
                 // 4. Build Context-Aware Navigation
                 ApplicationRouter.constructNavigationTree(sessionContext.role);
             }
@@ -2375,7 +2328,9 @@ if (modalDept) modalDept.innerText = deptDisplay;
                     ],
                     principal: [
                         { id: 'global', icon: 'fa-globe', label: 'College Overview' },
-                        { id: 'directory', icon: 'fa-search', label: 'Global Search' }
+                        { id: 'directory', icon: 'fa-search', label: 'Global Search' },
+                        { id: 'add_users', icon: 'fa-user-plus', label: 'Add Users' },
+                        { id: 'manage_faculty', icon: 'fa-chalkboard-teacher', label: 'Manage Faculty' }
                     ]
                 };
 
@@ -2457,6 +2412,10 @@ if (modalDept) modalDept.innerText = deptDisplay;
                             AdministrativeSubsystem.renderGlobalAnalytics();
                         } else if (targetModuleId === 'directory') {
                             AdministrativeSubsystem.renderDeepSearchInterface('principal');
+                        } else if (targetModuleId === 'add_users') {
+                            AdministrativeSubsystem.renderAddUserInterface();
+                        } else if (targetModuleId === 'manage_faculty') {
+                            AdministrativeSubsystem.renderManageFacultyInterface();
                         }
                         break;
                     
@@ -2492,26 +2451,19 @@ if (modalDept) modalDept.innerText = deptDisplay;
          * Purpose: Handles the complex UI for filtering, loading, rendering,
          * validating, and commiting attendance rosters to the database.
          */
-        class FacultySubsystem {
+class FacultySubsystem {
             
-            /**
-             * Entry point: Renders the configuration shell and KPI widgets.
-             * @returns {void}
-             */
             static renderAttendanceWorkspace() {
                 ApplicationRouter.mutateHeaderStrings("Mark Attendance", "Select a class and date to take attendance.");
-                
-                const userContext = AppMemory.getSessionContext();
                 const workspaceNode = document.getElementById('dashboard-workspace-area');
-
                 if (workspaceNode === null) return;
 
+                const userContext = AppMemory.getSessionContext();
                 const deptNameStr = AppMemory.resolveDepartmentName();
                 const currentDateStr = AppMemory.getSystemDate();
 
-                const interfaceTemplate = `
+                workspaceNode.innerHTML = `
                     <div class="metric-cards-grid" style="grid-template-columns: repeat(2, 1fr);">
-                        
                         <div class="metric-card-item theme-info">
                             <div class="metric-item-title">My Department</div>
                             <div class="metric-item-value">Dept ${userContext.dept_id}</div>
@@ -2519,7 +2471,6 @@ if (modalDept) modalDept.innerText = deptDisplay;
                                 <i class="fas fa-building" style="margin-right: 8px;"></i> ${deptNameStr}
                             </div>
                         </div>
-                        
                         <div class="metric-card-item theme-success">
                             <div class="metric-item-title">System Status</div>
                             <div class="metric-item-value" style="color: var(--color-success-main);">Ready</div>
@@ -2537,8 +2488,8 @@ if (modalDept) modalDept.innerText = deptDisplay;
                         
                         <div class="action-filter-toolbar">
                             <div class="filter-input-wrapper">
-                                <label style="display: block; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); font-family: var(--font-sans);">Year / Batch</label>
-                                <select id="config-year-select" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; color: var(--color-text-heading); font-family: var(--font-sans); cursor: pointer;" onchange="FacultySubsystem.invokeSubjectMetadata()">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted);">Year / Batch</label>
+                                <select id="config-year-select" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; cursor: pointer;" onchange="FacultySubsystem.invokeSubjectMetadata()">
                                     <option value="" disabled selected>Select Year...</option>
                                     <option value="1">1st Year</option>
                                     <option value="2">2nd Year</option>
@@ -2548,15 +2499,15 @@ if (modalDept) modalDept.innerText = deptDisplay;
                             </div>
                             
                             <div class="filter-input-wrapper" style="flex-grow: 2;">
-                                <label style="display: block; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); font-family: var(--font-sans);">Subject</label>
-                                <select id="config-subject-select" style="width: 100%; padding: 14px 16px; background-color: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; color: var(--color-text-heading); font-family: var(--font-sans); cursor: pointer;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted);">Subject</label>
+                                <select id="config-subject-select" style="width: 100%; padding: 14px 16px; background-color: var(--color-bg-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; cursor: pointer;">
                                     <option value="" disabled selected>Waiting for Year selection...</option>
                                 </select>
                             </div>
                             
                             <div class="filter-input-wrapper">
-                                <label style="display: block; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); font-family: var(--font-sans);">Date</label>
-                                <input type="date" id="config-date-input" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; color: var(--color-text-heading); font-family: var(--font-mono); cursor: pointer;" value="${currentDateStr}">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted);">Date</label>
+                                <input type="date" id="config-date-input" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; cursor: pointer;" value="${currentDateStr}">
                             </div>
                             
                             <button class="btn-secondary-action" onclick="FacultySubsystem.executeRosterRetrieval()" style="height: 52px; font-size: 0.95rem; padding: 0 28px;">
@@ -2573,98 +2524,157 @@ if (modalDept) modalDept.innerText = deptDisplay;
                         </div>
                     </div>
                 `;
-                
-                workspaceNode.innerHTML = interfaceTemplate;
             }
 
-            /**
-             * Triggered via dropdown 'onchange'. Fetches mapped subjects from DB.
-             * @returns {Promise<void>}
-             */
             static async invokeSubjectMetadata() {
                 const yearParameter = document.getElementById('config-year-select').value;
                 const dropdownNode = document.getElementById('config-subject-select');
-                
                 if (dropdownNode === null) return;
                 
                 const sessionContext = AppMemory.getSessionContext();
-
                 dropdownNode.innerHTML = '<option disabled selected>Loading subjects...</option>';
-                
                 try {
                     const relativePath = `/metadata/subjects?dept_id=${sessionContext.dept_id}&year=${yearParameter}`;
                     const subjectArray = await NetworkTransmitter.executeGet(relativePath);
-                    
                     if (subjectArray.length === 0) {
                         dropdownNode.innerHTML = '<option disabled selected>No subjects found for this year.</option>';
                         return;
                     }
-                    
                     let newOptionsHTML = '<option value="" disabled selected>Select Subject</option>';
-                    
-                    subjectArray.forEach(subjectElement => {
-                        newOptionsHTML += `<option value="${subjectElement.sub_id}">${subjectElement.sub_name}</option>`;
-                    });
-                    
+                    subjectArray.forEach(sub => { newOptionsHTML += `<option value="${sub.sub_id}">${sub.sub_name}</option>`; });
                     dropdownNode.innerHTML = newOptionsHTML;
-                    
                 } catch (exception) {
-                    console.warn("Subject Metadata Exception:", exception);
                     dropdownNode.innerHTML = '<option disabled selected>Error loading subjects</option>';
-                    UserInterfaceEngine.triggerAlert("Failed to load subjects from database.", "warning");
+                    UserInterfaceEngine.triggerAlert("Failed to load subjects.", "warning");
                 }
             }
 
-            /**
-             * Transmits filters to DB and renders the interactive table.
-             * @returns {Promise<void>}
-             */
-            static async executeRosterRetrieval() {
-                const deptIdVal = AppMemory.getSessionContext().dept_id;
-                const yearVal = document.getElementById('config-year-select').value;
-                const subjectIdVal = document.getElementById('config-subject-select').value;
-                const dateVal = document.getElementById('config-date-input').value;
+            // --- NEW: THIS IS THE MAGIC TOGGLE FUNCTION ---
+            static toggleAttendance(userId) {
+                const hiddenInput = document.getElementById(`status_${userId}`);
+                const btn = document.getElementById(`btn_${userId}`);
+                const row = document.getElementById(`row_${userId}`);
                 
+                // Remove previous colors
+                row.classList.remove('row-present', 'row-absent');
+                
+                // If it is empty or Absent, switch it to Present
+                if (hiddenInput.value === '' || hiddenInput.value === 'Absent') {
+                    hiddenInput.value = 'Present';
+                    btn.innerHTML = '<i class="fas fa-check"></i> Present';
+                    btn.className = 'single-toggle-btn is-present';
+                    row.classList.add('row-present');
+                } 
+                // If it is Present, switch it to Absent
+                else if (hiddenInput.value === 'Present') {
+                    hiddenInput.value = 'Absent';
+                    btn.innerHTML = '<i class="fas fa-times"></i> Absent';
+                    btn.className = 'single-toggle-btn is-absent';
+                    row.classList.add('row-absent');
+                }
+            }
+
+            // MARK ALL FUNCTION (Still works flawlessly)
+            static markAll(targetStatus) {
+                const hiddenInputs = document.querySelectorAll('.attendance-hidden-input');
+                if (hiddenInputs.length === 0) return UserInterfaceEngine.triggerAlert('No students loaded.', 'warning');
+                
+                hiddenInputs.forEach(input => { 
+                    const userId = input.id.replace('status_', '');
+                    const btn = document.getElementById(`btn_${userId}`);
+                    const row = document.getElementById(`row_${userId}`);
+                    
+                    input.value = targetStatus;
+                    row.classList.remove('row-present', 'row-absent');
+
+                    if (targetStatus === 'Present') {
+                        btn.innerHTML = '<i class="fas fa-check"></i> Present';
+                        btn.className = 'single-toggle-btn is-present';
+                        row.classList.add('row-present');
+                    } else {
+                        btn.innerHTML = '<i class="fas fa-times"></i> Absent';
+                        btn.className = 'single-toggle-btn is-absent';
+                        row.classList.add('row-absent');
+                    }
+                });
+                UserInterfaceEngine.triggerAlert(`All students marked as ${targetStatus}`, targetStatus === 'Present' ? 'success' : 'error');
+            }
+
+            // --- BUILD THE TABLE ---
+            static async executeRosterRetrieval() {
                 const filterPayload = {
-                    dept_id: deptIdVal,
-                    year: yearVal,
-                    subject_id: subjectIdVal,
-                    date: dateVal
+                    dept_id: AppMemory.getSessionContext().dept_id,
+                    year: document.getElementById('config-year-select').value,
+                    subject_id: document.getElementById('config-subject-select').value,
+                    date: document.getElementById('config-date-input').value
                 };
 
-                if (filterPayload.subject_id === "") {
-                    UserInterfaceEngine.triggerAlert("Please select a Subject first.", "error");
-                    return;
-                }
+                if (filterPayload.subject_id === "") return UserInterfaceEngine.triggerAlert("Please select a Subject first.", "error");
 
                 const renderingZone = document.getElementById('data-render-zone');
-                
                 if (renderingZone === null) return;
                 
                 UserInterfaceEngine.renderProcessingState('data-render-zone', "Fetching student list from database...");
 
                 try {
                     const serverResponse = await NetworkTransmitter.executePost('/faculty/fetch-class', filterPayload);
-                    
                     if (serverResponse.students === undefined || serverResponse.students.length === 0) {
-                        UserInterfaceEngine.renderVoidState('data-render-zone', 'fa-user-slash', 'No Students Found', "There are no students enrolled in this year and department.");
-                        return;
+                        return UserInterfaceEngine.renderVoidState('data-render-zone', 'fa-user-slash', 'No Students Found', "There are no students enrolled in this class.");
                     }
 
-                    const studentCount = serverResponse.students.length;
-
-                    // Build Data Table Header
+                    // --- INJECT CUSTOM CSS FOR SINGLE BUTTONS AND ROW COLORS ---
                     let dynamicTableHTML = `
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; padding: 32px 32px 16px 32px; border-bottom:1px solid var(--color-border-light);">
+                        <style>
+                            .row-present td { background-color: #ecfdf5 !important; transition: background-color 0.2s ease; }
+                            .row-absent td { background-color: #fef2f2 !important; transition: background-color 0.2s ease; }
+                            
+                            .single-toggle-btn {
+                                padding: 8px 24px;
+                                border-radius: 8px;
+                                border: 1px solid var(--color-border-dark);
+                                background: var(--color-bg-card);
+                                font-weight: 700;
+                                font-size: 0.95rem;
+                                color: var(--color-text-muted);
+                                cursor: pointer;
+                                transition: all 0.2s ease;
+                                width: 140px;
+                            }
+                            .single-toggle-btn.is-present {
+                                background-color: #10b981 !important;
+                                color: white !important;
+                                border-color: #10b981 !important;
+                                box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+                            }
+                            .single-toggle-btn.is-absent {
+                                background-color: #ef4444 !important;
+                                color: white !important;
+                                border-color: #ef4444 !important;
+                                box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+                            }
+                            .single-toggle-btn:hover {
+                                transform: translateY(-2px);
+                            }
+                        </style>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0; padding: 32px 32px 16px 32px;">
                             <div>
                                 <h3 style="margin: 0; color: var(--color-text-heading); font-family: var(--font-display); font-size: 1.4rem;">Student List</h3>
-                                <p style="margin: 0; font-size: 0.95rem; color: var(--color-text-muted); font-weight: 500; font-family: var(--font-sans);">
-                                    Total Students: <span class="status-badge badge-theme-info" style="margin-left: 8px; min-width: auto; padding: 4px 8px;">${studentCount}</span>
+                                <p style="margin: 0; font-size: 0.95rem; color: var(--color-text-muted); font-weight: 500;">
+                                    Total Students: <span class="status-badge badge-theme-info" style="margin-left: 8px;">${serverResponse.students.length}</span>
                                 </p>
                             </div>
-                            
                             <button id="btn-execute-commit" class="btn-secondary-action btn-theme-success" onclick="FacultySubsystem.validateAndCommitRoster()">
                                 <i class="fas fa-save"></i> Save Attendance
+                            </button>
+                        </div>
+
+                        <div style="padding: 16px 32px; background-color: var(--color-surface-hover); display: flex; gap: 12px; border-top: 1px solid var(--color-border-light); border-bottom: 1px solid var(--color-border-light);">
+                            <button onclick="FacultySubsystem.markAll('Present')" class="btn-secondary-action btn-theme-success" style="padding: 8px 16px; font-size: 0.9rem; box-shadow: none;">
+                                <i class="fas fa-check-double"></i> Mark All Present
+                            </button>
+                            <button onclick="FacultySubsystem.markAll('Absent')" class="btn-secondary-action" style="padding: 8px 16px; font-size: 0.9rem; background-color: var(--color-danger-main); box-shadow: none;">
+                                <i class="fas fa-times-circle"></i> Mark All Absent
                             </button>
                         </div>
                         
@@ -2672,34 +2682,20 @@ if (modalDept) modalDept.innerText = deptDisplay;
                             <table class="enterprise-data-table">
                                 <thead>
                                     <tr>
-                                        <th style="width: 15%;">Roll No</th>
-                                        <th style="width: 40%;">Student Name</th>
-                                        <th style="width: 22.5%; text-align:center;">Mark Present</th>
-                                        <th style="width: 22.5%; text-align:center;">Mark Absent</th>
+                                        <th style="width: 20%;">Roll No</th>
+                                        <th style="width: 50%;">Student Name</th>
+                                        <th style="width: 30%; text-align:center;">Attendance Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                     `;
 
-                    // Deduplication Map
                     const uniqueRosterMap = new Map();
-                    serverResponse.students.forEach(studentObj => {
-                        uniqueRosterMap.set(studentObj.user_id, studentObj);
-                    });
+                    serverResponse.students.forEach(stu => uniqueRosterMap.set(stu.user_id, stu));
 
-                    // Inject Rows Iteratively
                     uniqueRosterMap.forEach(studentRecord => {
-                        const isCurrentlyPresent = studentRecord.current_status === 'Present';
-                        const isCurrentlyAbsent = studentRecord.current_status === 'Absent';
-                        
-                        const checkedPresentStr = isCurrentlyPresent ? 'checked="checked"' : '';
-                        const checkedAbsentStr = isCurrentlyAbsent ? 'checked="checked"' : '';
-                        
                         dynamicTableHTML += `
-                            <tr class="interactive-student-row" 
-                                data-system-id="${studentRecord.user_id}" 
-                                data-legal-name="${studentRecord.full_name}" 
-                                data-roll-code="${studentRecord.roll}">
+                            <tr class="interactive-student-row" id="row_${studentRecord.user_id}" data-system-id="${studentRecord.user_id}" data-legal-name="${studentRecord.full_name}" data-roll-code="${studentRecord.roll}">
                                 
                                 <td>
                                     <span class="mono-chip">${studentRecord.roll}</span>
@@ -2710,18 +2706,13 @@ if (modalDept) modalDept.innerText = deptDisplay;
                                 </td>
                                 
                                 <td style="text-align:center;">
-                                    <input type="radio" name="status_radio_${studentRecord.user_id}" id="present_toggle_${studentRecord.user_id}" value="Present" class="attendance-radio-input" ${checkedPresentStr}>
-                                    <label for="present_toggle_${studentRecord.user_id}" class="attendance-radio-label">
-                                        <i class="fas fa-check"></i> Present
-                                    </label>
+                                    <input type="hidden" class="attendance-hidden-input" id="status_${studentRecord.user_id}" value="">
+                                    
+                                    <button type="button" id="btn_${studentRecord.user_id}" class="single-toggle-btn" onclick="FacultySubsystem.toggleAttendance('${studentRecord.user_id}')">
+                                        <i class="fas fa-minus"></i> Unmarked
+                                    </button>
                                 </td>
                                 
-                                <td style="text-align:center;">
-                                    <input type="radio" name="status_radio_${studentRecord.user_id}" id="absent_toggle_${studentRecord.user_id}" value="Absent" class="attendance-radio-input" ${checkedAbsentStr}>
-                                    <label for="absent_toggle_${studentRecord.user_id}" class="attendance-radio-label">
-                                        <i class="fas fa-times"></i> Absent
-                                    </label>
-                                </td>
                             </tr>
                         `;
                     });
@@ -2729,92 +2720,114 @@ if (modalDept) modalDept.innerText = deptDisplay;
                     renderingZone.innerHTML = dynamicTableHTML + `</tbody></table></div>`;
 
                 } catch (networkException) {
-                    UserInterfaceEngine.renderVoidState('data-render-zone', 'fa-exclamation-triangle', 'Error', "Failed to load student list. Server might be down.");
+                    UserInterfaceEngine.renderVoidState('data-render-zone', 'fa-exclamation-triangle', 'Error', "Failed to load student list.");
                 }
             }
 
-            /** * Strict validation commit 
-             * @returns {Promise<void>}
-             */
+            // --- FIXED VALIDATION TO READ THE NEW HIDDEN INPUTS ---
             static async validateAndCommitRoster() {
                 const domRowCollection = document.querySelectorAll('.interactive-student-row');
                 const subjectSelectNode = document.getElementById('config-subject-select');
                 const dateNode = document.getElementById('config-date-input');
                 const commitButtonNode = document.getElementById('btn-execute-commit');
-                
                 if (commitButtonNode === null) return;
                 
                 const verifiedPayloadArray = [];
+                const absentList = [];
                 let validationFaultDetected = false;
 
                 for (let i = 0; i < domRowCollection.length; i++) {
                     const htmlRow = domRowCollection[i];
-                    
                     htmlRow.classList.remove('table-row-fault');
                     
                     const systemId = htmlRow.getAttribute('data-system-id');
                     const studentName = htmlRow.getAttribute('data-legal-name');
                     const rollCode = htmlRow.getAttribute('data-roll-code');
                     
-                    const selectorString = `input[name="status_radio_${systemId}"]:checked`;
-                    const selectedRadioButton = htmlRow.querySelector(selectorString);
+                    // LOOKING AT OUR NEW HIDDEN INPUT
+                    const statusInput = document.getElementById(`status_${systemId}`);
                     
-                    if (selectedRadioButton === null) {
+                    if (statusInput === null || statusInput.value === "") {
                         htmlRow.classList.add('table-row-fault');
                         htmlRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         UserInterfaceEngine.triggerAlert(`Please mark Present or Absent for: ${studentName}`, 'error');
-                        validationFaultDetected = true;
-                        break; 
+                        validationFaultDetected = true; break; 
+                    }
+
+                    if (statusInput.value === 'Absent') {
+                        absentList.push(`${rollCode}: ${studentName}`);
                     }
                     
                     verifiedPayloadArray.push({
-                        id: systemId,
-                        name: studentName,
-                        roll: rollCode,
-                        status: selectedRadioButton.value
+                        id: systemId, name: studentName, roll: rollCode, status: statusInput.value
                     });
                 }
 
-                if (validationFaultDetected === true || verifiedPayloadArray.length === 0) {
-                    return;
-                }
-                
-                const activeIndex = subjectSelectNode.selectedIndex;
-                const activeSubjectText = subjectSelectNode.options[activeIndex].text;
+                if (validationFaultDetected === true || verifiedPayloadArray.length === 0) return;
 
-                const masterTransportPayload = {
-                    students: verifiedPayloadArray,
-                    date: dateNode.value,
-                    subject_id: subjectSelectNode.value,
-                    subject_name: activeSubjectText,
-                    teacher_id: AppMemory.getSessionContext().id,
-                    teacher_name: AppMemory.getSessionContext().full_name
+                let customModal = document.getElementById('custom-attendance-modal');
+                if (!customModal) {
+                    customModal = document.createElement('div');
+                    customModal.id = 'custom-attendance-modal';
+                    customModal.style.cssText = 'position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.85); z-index:9999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);';
+                    document.body.appendChild(customModal);
+                }
+
+                let absentHTML = '';
+                if (absentList.length === 0) {
+                    absentHTML = `<div style="text-align:center; padding: 20px; font-weight:800; color:var(--color-success-main); font-size:1.4rem;">✅ ALL STUDENTS PRESENT</div>`;
+                } else {
+                    absentHTML = `
+                        <div style="color:var(--color-danger-main); font-weight:800; margin-bottom:10px; font-size:1.1rem; text-align: left;">
+                            🚨 ABSENT STUDENTS (${absentList.length})
+                        </div>
+                        <div style="max-height: 250px; overflow-y: auto; background: var(--color-surface-input); padding: 15px; border-radius: var(--radius-sm); border: 1px solid var(--color-border-light); text-align:left;">
+                            <ul style="font-family:var(--font-mono); font-size:0.95rem; color:var(--color-text-heading); margin:0; padding:0; list-style:none;">
+                                ${absentList.map(name => `<li style="padding:8px 0; border-bottom:1px solid var(--color-border-light);">${name}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+
+                customModal.innerHTML = `
+                    <div class="workspace-card" style="width: 100%; max-width: 500px; background: var(--color-bg-card); border-top: 5px solid var(--color-accent-main); text-align:center; padding:30px; margin:0; border-radius: var(--radius-lg); box-shadow: var(--shadow-xl);">
+                        <h3 style="margin-bottom: 20px; font-family: var(--font-display); font-size: 1.6rem; color: var(--color-text-heading);">Confirm Submission</h3>
+                        ${absentHTML}
+                        <p style="margin-top: 24px; font-weight:600; color:var(--color-text-body); font-size:1.05rem;">Do you want to proceed and save this attendance to the database?</p>
+                        <div style="display:flex; gap: 15px; margin-top: 25px;">
+                            <button id="modal-btn-confirm" class="btn-submit-primary" style="flex: 1; margin:0; background-color: var(--color-success-main);">Save Records</button>
+                            <button id="modal-btn-cancel" class="btn-secondary-action" style="flex: 1; background: var(--color-surface-hover); color: var(--color-text-body); padding: 18px; border-radius: var(--radius-md); border:1px solid var(--color-border-dark); font-weight: 700; margin:0; cursor:pointer;">Double Check</button>
+                        </div>
+                    </div>
+                `;
+
+                customModal.style.display = 'flex'; 
+
+                document.getElementById('modal-btn-cancel').onclick = () => { customModal.style.display = 'none'; };
+
+                document.getElementById('modal-btn-confirm').onclick = async () => {
+                    customModal.style.display = 'none'; 
+                    const cachedButtonString = commitButtonNode.innerHTML;
+                    commitButtonNode.innerHTML = `<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Saving...`;
+                    commitButtonNode.disabled = true;
+                    
+                    const activeIndex = subjectSelectNode.selectedIndex;
+                    const activeSubjectText = subjectSelectNode.options[activeIndex].text;
+                    const masterTransportPayload = {
+                        students: verifiedPayloadArray, date: dateNode.value, subject_id: subjectSelectNode.value,
+                        subject_name: activeSubjectText, teacher_id: AppMemory.getSessionContext().id, teacher_name: AppMemory.getSessionContext().full_name
+                    };
+
+                    try {
+                        const serverResolution = await NetworkTransmitter.executePost('/faculty/mark', masterTransportPayload);
+                        if (serverResolution.status === 'success') { UserInterfaceEngine.triggerAlert("Attendance saved successfully!", "success"); } 
+                        else { throw new Error(serverResolution.message || "Failed to save to database."); }
+                    } catch (networkException) { UserInterfaceEngine.triggerAlert(networkException.message, "error"); } 
+                    finally { commitButtonNode.innerHTML = cachedButtonString; commitButtonNode.disabled = false; }
                 };
-
-                const cachedButtonString = commitButtonNode.innerHTML;
-                commitButtonNode.innerHTML = `<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Saving...`;
-                commitButtonNode.disabled = true;
-
-                try {
-                    const serverResolution = await NetworkTransmitter.executePost('/faculty/mark', masterTransportPayload);
-                    
-                    if (serverResolution.status === 'success') {
-                        UserInterfaceEngine.triggerAlert("Attendance saved successfully!", "success");
-                    } else {
-                        const errorMsg = serverResolution.message || "Failed to save to database.";
-                        throw new Error(errorMsg);
-                    }
-                    
-                } catch (networkException) {
-                    UserInterfaceEngine.triggerAlert(networkException.message, "error");
-                    
-                } finally {
-                    commitButtonNode.innerHTML = cachedButtonString;
-                    commitButtonNode.disabled = false;
-                }
             }
         }
-
+        /**
         /**
          * ====================================================================
          * MODULE 2: STUDENT SUBSYSTEM
@@ -3080,6 +3093,46 @@ if (modalDept) modalDept.innerText = deptDisplay;
             }
 
             /**
+             * MASTER DELETE TRIGGER: Handles both Student and Faculty deletions.
+             * Refreshes the correct table dynamically after deletion.
+             * @param {string} userType - 'student' or 'faculty'
+             * @param {string} targetId - The Roll No or Faculty ID
+             * @param {string} targetName - The name of the person
+             */
+            static async triggerMasterDelete(userType, targetId, targetName) {
+                const isConfirmed = confirm(`CRITICAL WARNING: Are you sure you want to permanently delete ${userType.toUpperCase()}: ${targetName} (${targetId})?`);
+                
+                if (isConfirmed === true) {
+                    
+                    const renderZone = userType === 'student' ? 'admin-search-output-zone' : 'admin-faculty-output-zone';
+                    
+                    UserInterfaceEngine.renderProcessingState(renderZone, `Deleting ${targetName} from database...`);
+
+                    try {
+                        const apiEndpoint = userType === 'student' ? '/admin/delete-student' : '/admin/delete-faculty';
+                        const payload = { id: targetId };
+                        
+                        const response = await NetworkTransmitter.executePost(apiEndpoint, payload);
+                        
+                        if (response.status === 'success') {
+                            UserInterfaceEngine.triggerAlert(`${targetName} was successfully deleted.`, 'success');
+                        } else {
+                            UserInterfaceEngine.triggerAlert(response.message, 'error');
+                        }
+                        
+                        if (userType === 'student') {
+                            AdministrativeSubsystem.executeDataLakeSearch(AppMemory.getSessionContext().role); 
+                        } else {
+                            AdministrativeSubsystem.executeFacultySearch();
+                        }
+
+                    } catch (error) {
+                        UserInterfaceEngine.triggerAlert("Database Error: " + error.message, 'error');
+                    }
+                }
+            }
+
+            /**
              * [HOD VIEW] Renders specific department aggregates broken down by Academic Year.
              * @returns {Promise<void>}
              */
@@ -3175,6 +3228,8 @@ if (modalDept) modalDept.innerText = deptDisplay;
                                 <h3 style="color: var(--color-text-heading); font-size: 1.5rem; margin-bottom: 4px; font-family: var(--font-display);">Department Averages</h3>
                                 <p style="color: var(--color-text-muted); margin: 0; font-family: var(--font-sans);">Compare attendance rates across different branches.</p>
                             </div>
+                            
+                            
                         </div>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
                     `;
@@ -3215,7 +3270,7 @@ if (modalDept) modalDept.innerText = deptDisplay;
             }
 
             /**
-             * Shared Drill-Down UI setup.
+             * Shared Drill-Down UI setup for viewing Students
              * @param {string} authorizationRoleString - 'hod' or 'principal'
              * @returns {void}
              */
@@ -3338,10 +3393,10 @@ if (modalDept) modalDept.innerText = deptDisplay;
                                 <thead style="background-color: var(--color-bg-card);">
                                     <tr>
                                         <th style="width: 15%;">Roll No</th>
-                                        <th style="width: 40%;">Student Name</th>
+                                        <th style="width: 35%;">Student Name</th>
                                         <th style="width: 15%; text-align: right;">Total Classes</th>
                                         <th style="width: 15%; text-align: right;">Attended</th>
-                                        <th style="width: 15%; text-align: center;">Percentage</th>
+                                        <th style="width: 20%; text-align: center;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -3352,6 +3407,17 @@ if (modalDept) modalDept.innerText = deptDisplay;
                         const isStudentCompliant = studentDataObject.percent >= 75;
                         const dynamicBadgeThemeClass = isStudentCompliant ? 'badge-theme-success' : 'badge-theme-danger';
                         
+                        let editBtnHtml = '';
+                        if (authorizationRoleString === 'principal') {
+                            const safeName = studentDataObject.name.replace(/'/g, "\\'");
+                            editBtnHtml = `
+                                <button onclick="AdministrativeSubsystem.openStudentEditModal('${studentDataObject.id}', '${studentDataObject.roll}', '${safeName}', '${targetDepartmentValue}', '${targetYearValue}')" 
+                                        style="background-color: #e0f9ff; color: #0284c7; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid #bae6fd; cursor: pointer; transition: all 0.2s; font-weight: 600; font-size: 0.85rem; margin-right: 8px;">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                            `;
+                        }
+
                         tableHTMLBuilderString += `
                             <tr>
                                 <td>
@@ -3372,10 +3438,19 @@ if (modalDept) modalDept.innerText = deptDisplay;
                                     ${studentDataObject.attended}
                                 </td>
                                 
-                                <td style="text-align: center;">
-                                    <span class="status-badge ${dynamicBadgeThemeClass}">
+                                <td style="text-align: center; display: flex; justify-content: center; align-items: center; border-bottom: none; padding-top: 15px;">
+                                    <span class="status-badge ${dynamicBadgeThemeClass}" style="padding: 8px 12px; font-size: 0.9rem; margin-right: 15px;">
                                         ${studentDataObject.percent}%
                                     </span>
+                                    
+                                    ${editBtnHtml}
+                                    
+                                    <button onclick="AdministrativeSubsystem.triggerMasterDelete('student', '${studentDataObject.id || studentDataObject.roll}', '${studentDataObject.name.replace(/'/g, "\\'")}')" 
+                                            style="background-color: #fee2e2; color: #ef4444; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid #fecaca; cursor: pointer; transition: all 0.2s; font-weight: 600; font-size: 0.85rem;" 
+                                            onmouseover="this.style.backgroundColor='#ef4444'; this.style.color='white';" 
+                                            onmouseout="this.style.backgroundColor='#fee2e2'; this.style.color='#ef4444';">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
                                 </td>
                             </tr>
                         `;
@@ -3387,7 +3462,351 @@ if (modalDept) modalDept.innerText = deptDisplay;
                     UserInterfaceEngine.renderVoidState('admin-search-output-zone', 'fa-exclamation-triangle', 'Error', "Failed to load student data.");
                 }
             }
+
+            /**
+             * Generates the dynamic edit UI for the Principal
+             */
+            static openStudentEditModal(id, roll, name, deptId, year) {
+                let modal = document.getElementById('god-mode-edit-modal');
+                if (!modal) {
+                    modal = document.createElement('div');
+                    modal.id = 'god-mode-edit-modal';
+                    modal.style.cssText = 'position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); z-index:9999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);';
+                    document.body.appendChild(modal);
+                }
+
+                modal.innerHTML = `
+                    <div class="workspace-card" style="width: 100%; max-width: 450px; background: white; border-top: 5px solid var(--color-role-principal);">
+                        <h3 style="margin-bottom: 20px; font-family: var(--font-display);">
+                            <i class="fas fa-user-edit" style="color: var(--color-role-principal); margin-right: 10px;"></i>Edit Student
+                        </h3>
+                        
+                        <div class="input-group">
+                            <label class="input-label">Roll Number</label>
+                            <input type="text" id="edit-stu-roll" class="text-input-field" value="${roll}">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Full Name</label>
+                            <input type="text" id="edit-stu-name" class="text-input-field" value="${name}">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Department</label>
+                            <select id="edit-stu-dept" class="text-input-field">
+                                <option value="1" ${deptId == 1 ? 'selected' : ''}>Computer Science</option>
+                                <option value="2" ${deptId == 2 ? 'selected' : ''}>Electronics & Comm</option>
+                                <option value="3" ${deptId == 3 ? 'selected' : ''}>Mechanical Engg</option>
+                                <option value="4" ${deptId == 4 ? 'selected' : ''}>Information Tech</option>
+                                <option value="5" ${deptId == 5 ? 'selected' : ''}>Electrical (EEE)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Current Year</label>
+                            <select id="edit-stu-year" class="text-input-field">
+                                <option value="1" ${year == 1 ? 'selected' : ''}>1st Year</option>
+                                <option value="2" ${year == 2 ? 'selected' : ''}>2nd Year</option>
+                                <option value="3" ${year == 3 ? 'selected' : ''}>3rd Year</option>
+                                <option value="4" ${year == 4 ? 'selected' : ''}>4th Year</option>
+                            </select>
+                        </div>
+
+                        <div style="display:flex; gap: 15px; margin-top: 25px;">
+                            <button class="btn-submit-primary" style="background-color: var(--color-role-principal);" onclick="AdministrativeSubsystem.submitStudentEdit('${id}')">Save Changes</button>
+                            <button class="btn-secondary-action" style="flex: 1; background: #e2e8f0; color: #334155; padding: 18px; border-radius: 12px; border:none; font-weight: 700; cursor:pointer;" onclick="document.getElementById('god-mode-edit-modal').style.display='none'">Cancel</button>
+                        </div>
+                    </div>
+                `;
+                modal.style.display = 'flex';
+            }
+
+            /**
+             * Submits the changes made in the Edit Modal
+             */
+            static async submitStudentEdit(studentId) {
+                const payload = {
+                    id: studentId,
+                    new_roll: document.getElementById('edit-stu-roll').value.trim(),
+                    new_name: document.getElementById('edit-stu-name').value.trim(),
+                    new_dept: document.getElementById('edit-stu-dept').value,
+                    new_year: document.getElementById('edit-stu-year').value
+                };
+
+                if (!payload.new_roll || !payload.new_name) {
+                    return UserInterfaceEngine.triggerAlert("Name and Roll No cannot be empty!", "warning");
+                }
+
+                document.getElementById('god-mode-edit-modal').style.display = 'none';
+                UserInterfaceEngine.renderProcessingState('admin-search-output-zone', "Updating student record...");
+
+                try {
+                    const response = await NetworkTransmitter.executePost('/principal/edit-student', payload);
+                    
+                    if (response.status === 'success') {
+                        UserInterfaceEngine.triggerAlert("Student updated successfully.", "success");
+                        AdministrativeSubsystem.executeDataLakeSearch('principal'); 
+                    } else {
+                        UserInterfaceEngine.triggerAlert(response.message, "error");
+                    }
+                } catch (err) {
+                    UserInterfaceEngine.triggerAlert(err.message, "error");
+                }
+            }
+
+            /**
+             * Renders the Add User forms for the Principal.
+             */
+            static renderAddUserInterface() {
+                ApplicationRouter.mutateHeaderStrings("User Registration", "Enroll new students and faculty members into the system.");
+                const workspaceNode = document.getElementById('dashboard-workspace-area');
+                if (workspaceNode === null) return;
+
+                workspaceNode.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px;">
+                        
+                        <div class="workspace-card" style="padding: 40px; border-top: 5px solid var(--color-role-student);">
+                            <h3 style="color: var(--color-text-heading); margin-bottom: 24px; font-family: var(--font-display);">
+                                <i class="fas fa-user-graduate" style="color: var(--color-role-student); margin-right: 12px;"></i>Register Student
+                            </h3>
+                            
+                            <div class="input-group">
+                                <label class="input-label">Roll Number</label>
+                                <input type="text" id="new-stu-username" class="text-input-field" placeholder="e.g. cs202">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Full Name</label>
+                                <input type="text" id="new-stu-name" class="text-input-field" placeholder="Student Name">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Password</label>
+                                <input type="password" id="new-stu-pass" class="text-input-field" placeholder="Create password">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Department</label>
+                                <select id="new-stu-dept" class="text-input-field" style="cursor:pointer;">
+                                    <option value="1">Computer Science</option>
+                                    <option value="2">Electronics & Comm</option>
+                                    <option value="3">Mechanical Engg</option>
+                                    <option value="4">Information Tech</option>
+                                    <option value="5">Electrical (EEE)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Current Year</label>
+                                <select id="new-stu-year" class="text-input-field" style="cursor:pointer;">
+                                    <option value="1">1st Year</option>
+                                    <option value="2">2nd Year</option>
+                                    <option value="3">3rd Year</option>
+                                    <option value="4">4th Year</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn-submit-primary" style="background-color: var(--color-role-student);" onclick="AdministrativeSubsystem.executeAddUser('student')">
+                                Register Student
+                            </button>
+                        </div>
+
+                        <div class="workspace-card" style="padding: 40px; border-top: 5px solid var(--color-role-faculty);">
+                            <h3 style="color: var(--color-text-heading); margin-bottom: 24px; font-family: var(--font-display);">
+                                <i class="fas fa-chalkboard-teacher" style="color: var(--color-role-faculty); margin-right: 12px;"></i>Register Faculty
+                            </h3>
+                            
+                            <div class="input-group">
+                                <label class="input-label">Faculty ID (Username)</label>
+                                <input type="text" id="new-fac-username" class="text-input-field" placeholder="e.g. fac99">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Full Name</label>
+                                <input type="text" id="new-fac-name" class="text-input-field" placeholder="Teacher Name">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Password</label>
+                                <input type="password" id="new-fac-pass" class="text-input-field" placeholder="Create password">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Department Assigned</label>
+                                <select id="new-fac-dept" class="text-input-field" style="cursor:pointer;">
+                                    <option value="1">Computer Science</option>
+                                    <option value="2">Electronics & Comm</option>
+                                    <option value="3">Mechanical Engg</option>
+                                    <option value="4">Information Tech</option>
+                                    <option value="5">Electrical (EEE)</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn-submit-primary" style="background-color: var(--color-role-faculty); margin-top: 105px;" onclick="AdministrativeSubsystem.executeAddUser('faculty')">
+                                Register Faculty
+                            </button>
+                        </div>
+
+                    </div>
+                `;
+            }
+
+            /**
+             * Submits the new user data to the backend.
+             */
+            static async executeAddUser(roleType) {
+                let payload = {};
+                let endpoint = '';
+
+                if (roleType === 'student') {
+                    payload = {
+                        username: document.getElementById('new-stu-username').value.trim(),
+                        full_name: document.getElementById('new-stu-name').value.trim(),
+                        password: document.getElementById('new-stu-pass').value.trim(),
+                        dept_id: document.getElementById('new-stu-dept').value,
+                        current_year: document.getElementById('new-stu-year').value
+                    };
+                    endpoint = '/admin/add-student';
+                    
+                    if (!payload.username || !payload.full_name || !payload.password) {
+                        return UserInterfaceEngine.triggerAlert("Please fill all Student fields!", "warning");
+                    }
+                } else {
+                    payload = {
+                        username: document.getElementById('new-fac-username').value.trim(),
+                        full_name: document.getElementById('new-fac-name').value.trim(),
+                        password: document.getElementById('new-fac-pass').value.trim(),
+                        dept_id: document.getElementById('new-fac-dept').value
+                    };
+                    endpoint = '/admin/add-faculty';
+                    
+                    if (!payload.username || !payload.full_name || !payload.password) {
+                        return UserInterfaceEngine.triggerAlert("Please fill all Faculty fields!", "warning");
+                    }
+                }
+
+                try {
+                    const response = await NetworkTransmitter.executePost(endpoint, payload);
+                    if (response.status === 'success') {
+                        UserInterfaceEngine.triggerAlert(response.message, 'success');
+                        
+                        // Clear the input fields after successful addition
+                        document.getElementById(`new-${roleType.substring(0,3)}-username`).value = '';
+                        document.getElementById(`new-${roleType.substring(0,3)}-name`).value = '';
+                        document.getElementById(`new-${roleType.substring(0,3)}-pass`).value = '';
+                    } else {
+                        UserInterfaceEngine.triggerAlert(response.message, 'error');
+                    }
+                } catch (error) {
+                    UserInterfaceEngine.triggerAlert(error.message, 'error');
+                }
+            }
+
+            /**
+             * Renders the UI to search and manage Faculty
+             */
+            static renderManageFacultyInterface() {
+                ApplicationRouter.mutateHeaderStrings("Manage Faculty", "View and remove faculty members from the system.");
+                const workspaceNode = document.getElementById('dashboard-workspace-area');
+                
+                if (workspaceNode === null) return;
+
+                workspaceNode.innerHTML = `
+                    <div class="workspace-card">
+                        <div style="border-bottom: 1px solid var(--color-border-light); padding-bottom: 20px; margin-bottom: 24px;">
+                            <h3 style="color: var(--color-text-heading); font-size: 1.3rem; margin-bottom: 4px; font-family: var(--font-display);">
+                                <i class="fas fa-chalkboard-teacher" style="color: var(--color-role-faculty); margin-right: 12px;"></i>Faculty Directory
+                            </h3>
+                            <p style="color: var(--color-text-muted); margin: 0; font-size: 0.95rem;">Select a department to view its teachers.</p>
+                        </div>
+                        <div class="action-filter-toolbar">
+                            <div class="filter-input-wrapper">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase;">Select Department</label>
+                                <select id="admin-faculty-dept" style="width: 100%; padding: 14px 16px; background-color: var(--color-surface-input); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm); font-size: 0.95rem; font-family: var(--font-sans);">
+                                    <option value="all">All Departments (Global)</option>
+                                    <option value="1">Computer Science</option>
+                                    <option value="2">Electronics & Comm</option>
+                                    <option value="3">Mechanical Engg</option>
+                                    <option value="4">Information Tech</option>
+                                    <option value="5">Electrical (EEE)</option>
+                                </select>
+                            </div>
+                            <button class="btn-secondary-action" style="height: 52px; padding: 0 28px;" onclick="AdministrativeSubsystem.executeFacultySearch()">
+                                <i class="fas fa-search"></i> Search Faculty
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="workspace-card" id="admin-faculty-output-zone" style="min-height: 400px; padding: 0; display: flex; flex-direction: column;">
+                        <div class="system-empty-state" style="background-color: transparent; border: none; flex-grow: 1;">
+                            <i class="fas fa-users system-empty-icon"></i>
+                            <h3 style="color: var(--color-text-heading); margin-bottom: 8px; font-family: var(--font-display); font-size: 1.25rem;">Ready to Search</h3>
+                            <p>Select your filters above and click search.</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            /**
+             * Hits the backend and builds the faculty data table
+             */
+            static async executeFacultySearch() {
+                const deptNode = document.getElementById('admin-faculty-dept');
+                if (deptNode === null) return;
+
+                UserInterfaceEngine.renderProcessingState('admin-faculty-output-zone', "Fetching faculty records...");
+
+                try {
+                    const response = await NetworkTransmitter.executePost('/admin/fetch-faculty', { dept_id: deptNode.value });
+                    
+                    if (!response.faculty || response.faculty.length === 0) {
+                        UserInterfaceEngine.renderVoidState('admin-faculty-output-zone', 'fa-user-slash', 'No Faculty Found', "No faculty members exist in this department.");
+                        return;
+                    }
+
+                    let htmlBuilderString = `
+                        <div class="data-table-container" style="border: none; box-shadow: none; border-radius: 0;">
+                            <div style="padding: 24px 32px; background-color: var(--color-bg-app); border-bottom: 1px solid var(--color-border-light); display: flex; justify-content: space-between; align-items: center;">
+                                <h4 style="margin: 0; color: var(--color-text-heading); font-family: var(--font-display); font-size: 1.1rem;">Faculty List</h4>
+                                <span class="status-badge badge-theme-info">${response.faculty.length} Teachers</span>
+                            </div>
+                            <table class="enterprise-data-table">
+                                <thead style="background-color: var(--color-bg-card);">
+                                    <tr>
+                                        <th style="width: 20%;">Faculty ID</th>
+                                        <th style="width: 40%;">Name</th>
+                                        <th style="width: 20%;">Department</th>
+                                        <th style="width: 20%; text-align: center;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `;
+
+                    response.faculty.forEach(fac => {
+                        // Resolve Dept Name using your config dictionary
+                        const deptName = SYSTEM_CONFIG.DEPARTMENT_DICTIONARY[fac.dept_id] || "General";
+                        
+                        htmlBuilderString += `
+                            <tr>
+                                <td>
+                                    <span class="mono-chip">${fac.username}</span>
+                                </td>
+                                <td style="font-weight: 600; font-size: 1.05rem; color: var(--color-text-heading);">
+                                    ${fac.full_name}
+                                </td>
+                                <td style="color: var(--color-text-muted); font-weight: 500;">
+                                    ${deptName}
+                                </td>
+                                <td style="text-align: center;">
+                                    <button onclick="AdministrativeSubsystem.triggerMasterDelete('faculty', '${fac.id}', '${fac.full_name}')" 
+                                            style="background-color: #fee2e2; color: #ef4444; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid #fecaca; cursor: pointer; transition: all 0.2s; font-weight: 600; font-size: 0.85rem;" 
+                                            onmouseover="this.style.backgroundColor='#ef4444'; this.style.color='white';" 
+                                            onmouseout="this.style.backgroundColor='#fee2e2'; this.style.color='#ef4444';">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    document.getElementById('admin-faculty-output-zone').innerHTML = htmlBuilderString + `</tbody></table></div>`;
+
+                } catch (error) {
+                    UserInterfaceEngine.renderVoidState('admin-faculty-output-zone', 'fa-exclamation-triangle', 'Error', "Failed to load faculty data.");
+                }
+            }
         }
+        
     </script>
 </body>
 </html>

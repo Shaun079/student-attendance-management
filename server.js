@@ -15,12 +15,7 @@
  * 8. Principal Intelligence Module (Global Aggregation)
  * 9. Historical Data Retrieval (Time-Machine)
  * 10. System Diagnostics & Health Checks
- * * * * CRITICAL PATCH NOTES (v120.0):
- * - INTEGRATED: HOD & Principal Analytics directly into the core kernel.
- * - VARIABLE SYNC: Renamed API outputs to 'total_classes' & 'attended_classes'.
- * - DUAL MATCHING: Matches Subject by ID OR Name (Fail-Safe against dirty data).
- * - DATA SANITIZATION: Trims and normalizes all database strings.
- * - DEEP LOGGING: Detailed console output for every transaction.
+ * 11. Administrative God-Mode (Adding, Fetching, Nuking, Editing)
  * * * LINE COUNT: 500+ (Enterprise Standard)
  * ================================================================================== 
  */
@@ -175,9 +170,6 @@ app.post('/api/login', (req, res) => {
 app.get('/api/metadata/subjects', (req, res) => {
     const { dept_id, year } = req.query;
     
-    // Log Metadata Request
-    // console.log(`   -> Loading Subjects: Dept ${dept_id} | Year ${year}`);
-    
     const sql = `
         SELECT sub_id, sub_name, sub_code 
         FROM subjects 
@@ -207,7 +199,6 @@ app.post('/api/faculty/fetch-class', (req, res) => {
     console.log(`\n📋 [FACULTY] Fetching Class Register (Dept: ${dept_id}, Year: ${year})`);
     
     // Complex Join: Gets ALL students for that year, and LEFT JOINs their status for the specific date/subject
-    // If status is NULL, we default to 'Pending' via COALESCE
     const sql = `
         SELECT 
             s.id as user_id, 
@@ -244,7 +235,6 @@ app.post('/api/faculty/mark', (req, res) => {
     }
 
     // Prepare Bulk Data for SQL Injection
-    // We map the incoming JSON array to a 2D array for the MySQL driver
     const values = students.map(std => [
         std.id, 
         std.name,           // Insert into student_name (Denormalized)
@@ -282,10 +272,6 @@ app.post('/api/faculty/mark', (req, res) => {
 
 /* * ==================================================================================
  * 6. STUDENT ANALYTICS ENGINE (THE "0% FIX" - v120.0)
- * * * ARCHITECTURE CHANGE:
- * 1. Renames output variables to match HTML ('total_classes', 'attended_classes').
- * 2. Uses DUAL MATCHING (ID + Name) to guarantee no data is lost.
- * 3. Uses JavaScript Memory Matching to bypass SQL Foreign Key strictness.
  * ================================================================================== 
  */
 app.post('/api/student/stats', (req, res) => {
@@ -303,7 +289,6 @@ app.post('/api/student/stats', (req, res) => {
         const deptId = userRes[0].dept_id;
 
         // --- STEP 2: GET CURRICULUM SUBJECTS ---
-        // We need to know what subjects this student *should* have attended
         const subSql = `SELECT sub_name, sub_id FROM subjects WHERE dept_id = ? AND target_year = ?`;
         db.query(subSql, [deptId, year], (err, subjects) => {
             if (err) {
@@ -313,7 +298,6 @@ app.post('/api/student/stats', (req, res) => {
             console.log(`   -> Subjects Found: ${subjects.length}`);
 
             // --- STEP 3: GET RAW ATTENDANCE DATA ---
-            // CRITICAL: We query by 'student_id' AND Select Subject ID + Name for dual matching
             const attSql = `SELECT subject_id, subject_name, status FROM attendance_records WHERE student_id = ?`;
             
             db.query(attSql, [user_id], (err, attendance) => {
@@ -328,14 +312,10 @@ app.post('/api/student/stats', (req, res) => {
                 let overallTotal = 0;
 
                 const stats = subjects.map(sub => {
-                    // NORMALIZE STRINGS: Remove spaces, convert to lowercase
                     const cleanSubName = sub.sub_name.trim().toLowerCase();
                     const targetSubID = sub.sub_id;
 
-                    // DUAL MATCH LOGIC
-                    // Match if Subject Names are same OR Subject IDs are same
                     const records = attendance.filter(r => {
-                        // Safe check for null subject names
                         const rName = r.subject_name ? r.subject_name.trim().toLowerCase() : '';
                         const nameMatch = rName === cleanSubName;
                         const idMatch = r.subject_id === targetSubID; // Integer match
@@ -345,7 +325,6 @@ app.post('/api/student/stats', (req, res) => {
 
                     const total = records.length;
                     
-                    // COUNT PRESENT: Checks for 'P', 'Present', 'present' (Case Insensitive)
                     const attended = records.filter(r => 
                         r.status.toLowerCase().startsWith('p')
                     ).length;
@@ -353,13 +332,6 @@ app.post('/api/student/stats', (req, res) => {
                     overallTotal += total;
                     overallAttended += attended;
 
-                    // Log successful matches for debugging
-                    if (total > 0) {
-                        // console.log(`      -> Match: ${sub.sub_name} (${attended}/${total})`);
-                    }
-
-                    // --- CRITICAL OUTPUT FORMATTING ---
-                    // This matches your HTML: .total_classes and .attended_classes
                     return {
                         subject: sub.sub_name,
                         subject_name: sub.sub_name, // Redundant fallback
@@ -384,7 +356,6 @@ app.post('/api/student/stats', (req, res) => {
 
 /* * ==================================================================================
  * 7. HOD & PRINCIPAL ANALYTICS ENGINE (INTELLIGENCE MODULE)
- * Provides aggregated data for higher-level dashboards.
  * ================================================================================== 
  */
 
@@ -394,8 +365,6 @@ app.post('/api/analytics/dashboard', (req, res) => {
     console.log(`\n📈 [ANALYTICS] Dashboard Request for ${role.toUpperCase()}`);
 
     if (role === 'hod') {
-        // HOD VIEW: Group by YEAR for specific Dept
-        // Calculates average attendance for Year 1, 2, 3, 4
         const sql = `
             SELECT 
                 s.current_year as label,
@@ -418,8 +387,6 @@ app.post('/api/analytics/dashboard', (req, res) => {
         });
 
     } else if (role === 'principal') {
-        // PRINCIPAL VIEW: Group by DEPARTMENT
-        // Calculates global average for CS, EC, ME, IT, EEE
         const sql = `
             SELECT 
                 d.dept_name as label,
@@ -446,12 +413,10 @@ app.post('/api/analytics/dashboard', (req, res) => {
 });
 
 // [STUDENT LIST ANALYTICS] - Drill Down Feature
-// Fetches every student in a batch and calculates their individual attendance %
 app.post('/api/analytics/students', (req, res) => {
     const { dept_id, year } = req.body;
     console.log(`\n🔍 [DRILL DOWN] Fetching Students for Dept ${dept_id}, Year ${year}`);
     
-    // Subqueries used to calculate Total and Attended counts per student efficiently
     const sql = `
         SELECT 
             s.id, 
@@ -470,7 +435,6 @@ app.post('/api/analytics/students', (req, res) => {
             return res.json({ students: [] });
         }
         
-        // Map to simpler object structure
         const data = rows.map(s => ({
             id: s.id,
             roll: s.roll,
@@ -487,14 +451,11 @@ app.post('/api/analytics/students', (req, res) => {
 
 /* * ==================================================================================
  * 8. HISTORY ENGINE (Calendar & List View)
- * Retrieves historical data based on Date and Student ID
  * ================================================================================== 
  */
 app.post('/api/student/history', (req, res) => {
     const { user_id, date } = req.body;
     
-    // Simple fetch by User ID and Date
-    // Using COALESCE to handle potential null subject names
     const sql = `
         SELECT 
             COALESCE(subject_name, 'Unknown Subject') as subject,
@@ -511,7 +472,6 @@ app.post('/api/student/history', (req, res) => {
 
 /* * ==================================================================================
  * 9. ADMIN DASHBOARD ENGINE (Global Statistics - Legacy Support)
- * Aggregates data across all departments for the Principal/Admin view (Old Endpoint)
  * ================================================================================== 
  */
 app.get('/api/admin/stats', (req, res) => {
@@ -536,9 +496,6 @@ app.get('/api/admin/stats', (req, res) => {
  * 10. SYSTEM UTILITIES & DIAGNOSTICS
  * ================================================================================== 
  */
-
-// Health Check Endpoint
-// Used by monitoring tools to check if the server is alive
 app.get('/api/health', (req, res) => {
     res.json({ 
         status: 'online', 
@@ -548,17 +505,177 @@ app.get('/api/health', (req, res) => {
 });
 
 /* * ==================================================================================
- * 11. SYSTEM BOOT SEQUENCE
+ * 11. ADMINISTRATIVE ROUTES (GOD-MODE & MANAGEMENT)
  * ================================================================================== 
  */
+
+// --- 1. ADD NEW STUDENT ---
+app.post('/api/admin/add-student', (req, res) => {
+    const { username, password, full_name, dept_id, current_year } = req.body;
+    
+    const sql = `INSERT INTO students (username, password, full_name, dept_id, current_year) VALUES (?, ?, ?, ?, ?)`;
+    
+    db.query(sql, [username, password, full_name, dept_id, current_year], (err, result) => {
+        if (err) {
+            if (err.code === 'ER_DUP_ENTRY') return res.json({ status: 'error', message: 'That Roll Number already exists!' });
+            return res.json({ status: 'error', message: 'Database Error: ' + err.message });
+        }
+        res.json({ status: 'success', message: `Student ${full_name} added successfully!` });
+    });
+});
+
+// --- 2. ADD NEW FACULTY ---
+app.post('/api/admin/add-faculty', (req, res) => {
+    const { username, password, full_name, dept_id } = req.body;
+    
+    const sql = `INSERT INTO faculty (username, password, full_name, dept_id) VALUES (?, ?, ?, ?)`;
+    
+    db.query(sql, [username, password, full_name, dept_id], (err, result) => {
+        if (err) {
+            if (err.code === 'ER_DUP_ENTRY') return res.json({ status: 'error', message: 'That Faculty ID already exists!' });
+            return res.json({ status: 'error', message: 'Database Error: ' + err.message });
+        }
+        res.json({ status: 'success', message: `Faculty ${full_name} added successfully!` });
+    });
+});
+
+// --- 3. FETCH FACULTY LIST ---
+app.post('/api/admin/fetch-faculty', (req, res) => {
+    const { dept_id } = req.body;
+    
+    let sql = `SELECT id, username, full_name, dept_id FROM faculty`;
+    let params = [];
+    
+    // Filter by department if not "all"
+    if (dept_id && dept_id !== 'all') {
+        sql += ` WHERE dept_id = ?`;
+        params.push(dept_id);
+    }
+    sql += ` ORDER BY full_name ASC`;
+
+    db.query(sql, params, (err, results) => {
+        if (err) {
+            console.error("Fetch Faculty Error:", err);
+            return res.json({ faculty: [] });
+        }
+        res.json({ faculty: results });
+    });
+});
+
+// --- 4. DELETE STUDENT (FIXED & LOGGED) ---
+app.post('/api/admin/delete-student', (req, res) => {
+    const { id } = req.body;
+    console.log(`\n🗑️ [ADMIN] Deleting Student ID: ${id}`);
+
+    if (!id) return res.json({ status: 'error', message: 'ID is missing from request body' });
+
+    // Step 1: Wipe attendance records first (Prevents Foreign Key Errors)
+    db.query('DELETE FROM attendance_records WHERE student_id = ?', [id], (err) => {
+        if (err) {
+            console.error("❌ Error wiping attendance:", err.message);
+            return res.json({ status: 'error', message: 'Wipe failed: ' + err.message });
+        }
+
+        // Step 2: Delete student (The Trigger will handle the deletion_logs automatically)
+        db.query('DELETE FROM students WHERE id = ?', [id], (err, result) => {
+            if (err) {
+                console.error("❌ Student Delete Error:", err.message);
+                return res.json({ status: 'error', message: 'Delete failed: ' + err.message });
+            }
+            
+            if (result.affectedRows === 0) {
+                console.log(`⚠️ No student found with ID: ${id}`);
+                return res.json({ status: 'error', message: 'Student not found in database.' });
+            }
+
+            console.log(`✅ Student ${id} vaporized successfully.`);
+            res.json({ status: 'success', message: 'Student and records deleted successfully.' });
+        });
+    });
+});
+
+// --- 5. DELETE FACULTY (FIXED & LOGGED) ---
+app.post('/api/admin/delete-faculty', (req, res) => {
+    const { id } = req.body;
+    console.log(`\n👨‍🏫 [ADMIN] Deleting Faculty ID: ${id}`);
+
+    if (!id) return res.json({ status: 'error', message: 'ID is missing from request body' });
+
+    // Step 1: Wipe attendance marked by this faculty
+    db.query('DELETE FROM attendance_records WHERE faculty_id = ?', [id], (err) => {
+        if (err) {
+            console.error("❌ Error wiping faculty records:", err.message);
+            return res.json({ status: 'error', message: 'Wipe failed: ' + err.message });
+        }
+
+        // Step 2: Delete faculty (Trigger logs this automatically)
+        db.query('DELETE FROM faculty WHERE id = ?', [id], (err, result) => {
+            if (err) {
+                console.error("❌ Faculty Delete Error:", err.message);
+                return res.json({ status: 'error', message: 'Delete failed: ' + err.message });
+            }
+
+            console.log(`✅ Faculty ${id} removed successfully.`);
+            res.json({ status: 'success', message: 'Faculty member removed successfully.' });
+        });
+    });
+});
+
+// --- 6. EDIT STUDENT (PRINCIPAL GOD-MODE) ---
+app.post('/api/principal/edit-student', (req, res) => {
+    const { id, new_roll, new_name, new_dept, new_year } = req.body;
+    console.log(`\n🛠️ [GOD-MODE] Editing Student ID: ${id} -> ${new_name} (${new_roll})`);
+
+    if (!id || !new_roll || !new_name) {
+        return res.json({ status: 'error', message: 'Missing required fields' });
+    }
+
+    const sql = `
+        UPDATE students 
+        SET username = ?, full_name = ?, dept_id = ?, current_year = ? 
+        WHERE id = ?
+    `;
+
+    db.query(sql, [new_roll, new_name, new_dept, new_year, id], (err, result) => {
+        if (err) {
+            console.error("❌ Edit Error:", err.message);
+            if (err.code === 'ER_DUP_ENTRY') {
+                return res.json({ status: 'error', message: 'That Roll Number already exists in the system.' });
+            }
+            return res.json({ status: 'error', message: 'Database error: ' + err.message });
+        }
+        if (result.affectedRows === 0) {
+            return res.json({ status: 'error', message: 'Student not found in database.' });
+        }
+        console.log(`✅ Student ${id} updated successfully.`);
+        res.json({ status: 'success', message: 'Student records updated across the system.' });
+    });
+});
+
+// --- 7. NUKE ALL FACULTY (GOD-MODE) ---
+app.post('/api/admin/delete-all-faculty', (req, res) => {
+    console.log(`\n☢️ [ADMIN] NUKING ALL FACULTY RECORDS`);
+    
+    // Wipe records tied to faculty to prevent constraint failures
+    db.query('DELETE FROM attendance_records WHERE faculty_id IS NOT NULL', (err) => {
+        if(err) return res.json({ status: 'error', message: err.message });
+        
+        // Destroy all faculty
+        db.query('DELETE FROM faculty', (err, result) => {
+            if(err) return res.json({ status: 'error', message: err.message });
+            console.log(`✅ All faculty vaporized. Rows affected: ${result.affectedRows}`);
+            res.json({ status: 'success', message: 'All faculty records permanently deleted.' });
+        });
+    });
+});
+
+// --- SYSTEM BOOT SEQUENCE ---
 app.listen(PORT, () => {
     console.log(`\n================================================================`);
-    console.log(`🚀 ENTERPRISE SERVER ONLINE`);
+    console.log(`🚀 ENTERPRISE SERVER ONLINE | PORT: ${PORT}`);
     console.log(`================================================================`);
-    console.log(`   Network Access: http://localhost:${PORT}`);
-    console.log(`   System Build: EduTrack v120.0.0 (Titanium Ultimate)`);
-    console.log(`   Engine: Dual-Match Logic (ID + Name)`);
-    console.log(`   Analytics: HOD & Principal Intelligence Active`);
-    console.log(`   Status: Waiting for connections...`);
+    console.log(`   Build: EduTrack v120.0.0 (Titanium Ultimate)`);
+    console.log(`   Logging: Active | Database: Connected`);
+    console.log(`   Status: Ready for requests...`);
     console.log(`----------------------------------------------------------------`);
 });
